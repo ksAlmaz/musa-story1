@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قصة موسى وهارون عليهما السلام</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf6e3;
+    --paper: #fffef7;
+    --ink: #2c1a0e;
+    --accent: #8b2c00;
+    --gold: #b8860b;
+    --gold-light: #d4a843;
+    --border: #c9a96e;
+    --tooltip-bg: #1a3a2a;
+    --tooltip-text: #f0e8d0;
+    --highlight: rgba(184, 134, 11, 0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(184,134,11,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(139,44,0,0.05) 0%, transparent 50%);
+    min-height: 100vh;
+    font-family: 'Scheherazade New', 'Amiri', serif;
+    color: var(--ink);
+    padding: 2rem 1rem;
+  }
+
+  .page-container {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .book-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .series-title {
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Amiri', serif;
+    margin-bottom: 0.5rem;
+    direction: rtl;
+  }
+
+  .ornament {
+    color: var(--gold);
+    font-size: 1.4rem;
+    display: block;
+    margin: 0.4rem 0;
+  }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem 3rem;
+    margin-bottom: 2.5rem;
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.08),
+      inset 0 0 40px rgba(184,134,11,0.03);
+    position: relative;
+  }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid rgba(184,134,11,0.2);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .page-num {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2.2rem;
+    height: 2.2rem;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-family: 'Amiri', serif;
+  }
+
+  .story-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'Scheherazade New', serif;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    font-style: italic;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.5rem 0 1rem;
+    font-family: 'Scheherazade New', serif;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.2rem 0;
+    opacity: 0.5;
+  }
+
+  p.arabic-text {
+    font-size: 1.55rem;
+    line-height: 2.6;
+    text-align: justify;
+    margin-bottom: 1rem;
+    direction: rtl;
+    font-family: 'Scheherazade New', serif;
+  }
+
+  /* Tooltip word */
+  .w {
+    position: relative;
+    display: inline;
+    cursor: pointer;
+    border-bottom: 1px dotted var(--gold);
+    transition: background 0.15s, color 0.15s;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  .w:hover {
+    background: var(--highlight);
+    color: var(--accent);
+  }
+
+  .w .tip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    padding: 0.55rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    direction: ltr;
+    text-align: left;
+    line-height: 1.5;
+    font-family: 'Georgia', serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    transition: opacity 0.18s;
+    min-width: 180px;
+    max-width: 260px;
+    white-space: normal;
+  }
+
+  .w .tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--tooltip-bg);
+  }
+
+  .w:hover .tip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tip .tip-word {
+    font-weight: bold;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.9rem;
+  }
+  .tip .tip-orig {
+    color: #a8d5b5;
+    display: block;
+    font-size: 0.78rem;
+    margin-bottom: 2px;
+  }
+  .tip .tip-ctx {
+    color: var(--tooltip-text);
+    display: block;
+    font-size: 0.78rem;
+    opacity: 0.85;
+  }
+
+  .legend {
+    text-align: center;
+    font-size: 0.78rem;
+    color: #888;
+    font-family: Georgia, serif;
+    direction: ltr;
+    margin-bottom: 1.5rem;
+  }
+
+  .legend span {
+    border-bottom: 1px dotted var(--gold);
+    padding: 0 3px;
+  }
+</style>
+</head>
+<body>
+<div class="page-container">
+
+  <div class="book-header">
+    <div class="series-title">قِصَصُ الأَنْبِيَاءِ لِلْأَطْفَال</div>
+    <span class="ornament">❧ ✦ ❧</span>
+  </div>
+
+  <p class="legend">Наведите мышкой на <span>подчёркнутое слово</span> — появится перевод</p>
+
+  <!-- PAGE 137 -->
+  <div class="page">
+    <h1 class="story-title">قِصَّةُ مُوسَى وَهَارُونَ</h1>
+    <p class="subtitle">– عَلَيْهِمَا السَّلَامُ –</p>
+    <hr class="divider">
+
+    <p class="arabic-text">
+      <span class="w">لَمَّا<span class="tip"><span class="tip-word">لَمَّا</span><span class="tip-orig">Букв.: когда, как только</span><span class="tip-ctx">В тексте: «Когда Якуб вошёл…»</span></span></span>
+      <span class="w">دَخَلَ<span class="tip"><span class="tip-word">دَخَلَ</span><span class="tip-orig">Вошёл (от دَخَلَ — входить)</span><span class="tip-ctx">«вошёл в Египет»</span></span></span>
+      <span class="w">يَعْقُوبُ<span class="tip"><span class="tip-word">يَعْقُوبُ</span><span class="tip-orig">Имя пророка Иакова (Якуба)</span><span class="tip-ctx">Пророк Якуб и его семья переехали в Египет</span></span></span>
+      –
+      <span class="w">عَلَيْهِ السَّلَامُ<span class="tip"><span class="tip-word">عَلَيْهِ السَّلَامُ</span><span class="tip-orig">Мир ему (формула уважения к пророку)</span><span class="tip-ctx">Благословение, которое упоминают при имени пророка</span></span></span>
+      –
+      <span class="w">مِصْرَ<span class="tip"><span class="tip-word">مِصْرَ</span><span class="tip-orig">Египет</span><span class="tip-ctx">Страна, куда пришёл Якуб</span></span></span>
+      <span class="w">هُوَ<span class="tip"><span class="tip-word">هُوَ</span><span class="tip-orig">Он</span><span class="tip-ctx">Имеется в виду сам Якуб</span></span></span>
+      <span class="w">وَأَوْلَادُهُ<span class="tip"><span class="tip-word">وَأَوْلَادُهُ</span><span class="tip-orig">И его дети (أَوْلَاد — дети, сыновья)</span><span class="tip-ctx">Якуб пришёл со своими детьми</span></span></span>
+      <span class="w">وَأَحْفَادُهُ<span class="tip"><span class="tip-word">وَأَحْفَادُهُ</span><span class="tip-orig">И его внуки (أَحْفَاد — внуки, потомки)</span><span class="tip-ctx">Вся семья: дети и внуки</span></span></span>،
+      <span class="w">وَأَقَامُوا<span class="tip"><span class="tip-word">وَأَقَامُوا</span><span class="tip-orig">И они поселились (أَقَامَ — жить, оставаться)</span><span class="tip-ctx">Семья обосновалась в Египте</span></span></span>
+      <span class="w">بِهَا<span class="tip"><span class="tip-word">بِهَا</span><span class="tip-orig">В ней (бха — в этой стране/в Египте)</span><span class="tip-ctx">«Поселились в ней», т.е. в Египте</span></span></span>
+      <span class="w">وَأَصْبَحُوا<span class="tip"><span class="tip-word">وَأَصْبَحُوا</span><span class="tip-orig">И стали (أَصْبَحَ — стать, оказаться)</span><span class="tip-ctx">«И стали они…»</span></span></span>
+      <span class="w">يَتَحَكَّمُونَ<span class="tip"><span class="tip-word">يَتَحَكَّمُونَ</span><span class="tip-orig">Управляли, господствовали (تَحَكَّمَ — контролировать, владеть)</span><span class="tip-ctx">Они стали контролировать большую часть богатств страны</span></span></span>
+      فِي
+      <span class="w">غَالِبِ<span class="tip"><span class="tip-word">غَالِبِ</span><span class="tip-orig">Большей части (غَالِب — преобладающий, большинство)</span><span class="tip-ctx">«В большей части богатств страны»</span></span></span>
+      <span class="w">ثَرَوَاتِ<span class="tip"><span class="tip-word">ثَرَوَاتِ</span><span class="tip-orig">Богатств, состояний (ثَرْوَة — богатство, состояние)</span><span class="tip-ctx">Они контролировали богатства Египта</span></span></span>
+      <span class="w">الْبِلَادِ<span class="tip"><span class="tip-word">الْبِلَادِ</span><span class="tip-orig">Страны (بِلَاد — страна, земля)</span><span class="tip-ctx">Богатства всей страны</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">وَكَانَ<span class="tip"><span class="tip-word">وَكَانَ</span><span class="tip-orig">И был (كَانَ — быть, являться)</span><span class="tip-ctx">«И был Якуб…»</span></span></span>
+      <span class="w">يَعْقُوبُ<span class="tip"><span class="tip-word">يَعْقُوبُ</span><span class="tip-orig">Пророк Яков</span><span class="tip-ctx">Снова говорится о Якубе</span></span></span>
+      – عَلَيْهِ السَّلَامُ –
+      <span class="w">قَدْ لَقَّبَهُ<span class="tip"><span class="tip-word">قَدْ لَقَّبَهُ</span><span class="tip-orig">Дал ему прозвище (لَقَّبَ — дать прозвище/титул)</span><span class="tip-ctx">Аллах дал ему прозвище «Исраил»</span></span></span>
+      <span class="w">اللهُ<span class="tip"><span class="tip-word">اللهُ</span><span class="tip-orig">Аллах (Бог)</span><span class="tip-ctx">Всевышний наделил его этим именем</span></span></span>
+      بِـ
+      (<span class="w">إِسْرَائِيلَ<span class="tip"><span class="tip-word">إِسْرَائِيلَ</span><span class="tip-orig">Исраиль — арабская форма имени Израиль</span><span class="tip-ctx">Это Божественное прозвище Якуба, означает «раб Бога»</span></span></span>)،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">وَبَعْدَ<span class="tip"><span class="tip-word">وَبَعْدَ</span><span class="tip-orig">И после того, как</span><span class="tip-ctx">«После того как умер Якуб…»</span></span></span>
+      أَنْ
+      <span class="w">مَاتَ<span class="tip"><span class="tip-word">مَاتَ</span><span class="tip-orig">Умер (مَاتَ — умирать)</span><span class="tip-ctx">Смерть пророка Якуба</span></span></span>
+      <span class="w">يَعْقُوبُ<span class="tip"><span class="tip-word">يَعْقُوبُ</span><span class="tip-orig">Якуб</span><span class="tip-ctx">После смерти Якуба</span></span></span>
+      <span class="w">وَمَاتَ<span class="tip"><span class="tip-word">وَمَاتَ</span><span class="tip-orig">И умер</span><span class="tip-ctx">Также умер и Юсуф</span></span></span>
+      <span class="w">يُوسُفُ<span class="tip"><span class="tip-word">يُوسُفُ</span><span class="tip-orig">Юсуф — пророк Иосиф</span><span class="tip-ctx">Сын Якуба, пророк Юсуф</span></span></span>
+      – عَلَيْهِمَا السَّلَامُ –،
+      <span class="w">وَمَاتَ<span class="tip"><span class="tip-word">وَمَاتَ</span><span class="tip-orig">И умерли</span><span class="tip-ctx">Умерли братья Юсуфа</span></span></span>
+      <span class="w">إِخْوَةُ<span class="tip"><span class="tip-word">إِخْوَةُ</span><span class="tip-orig">Братья (إِخْوَة — мн.ч. от أَخ — брат)</span><span class="tip-ctx">Братья Юсуфа, сыновья Якуба</span></span></span>
+      <span class="w">يُوسُفَ<span class="tip"><span class="tip-word">يُوسُفَ</span><span class="tip-orig">Юсуфа (родительный падеж)</span><span class="tip-ctx">Братья Юсуфа тоже умерли</span></span></span>،
+      <span class="w">وَكَثُرَتْ<span class="tip"><span class="tip-word">وَكَثُرَتْ</span><span class="tip-orig">И умножились, стало много (كَثُرَ — увеличиваться, множиться)</span><span class="tip-ctx">Потомки очень размножились</span></span></span>
+      <span class="w">بَعْدَ ذَلِكَ<span class="tip"><span class="tip-word">بَعْدَ ذَلِكَ</span><span class="tip-orig">После этого (бa'да зaлика)</span><span class="tip-ctx">После смерти этих людей</span></span></span>
+      <span class="w">ذُرِّيَّةُ<span class="tip"><span class="tip-word">ذُرِّيَّةُ</span><span class="tip-orig">Потомство, потомки (ذُرِّيَّة — потомство, дети и внуки)</span><span class="tip-ctx">Потомки Исраиля (Якуба) очень размножились</span></span></span>
+      <span class="w">إِسْرَائِيلَ<span class="tip"><span class="tip-word">إِسْرَائِيلَ</span><span class="tip-orig">Исраиля (Израиля)</span><span class="tip-ctx">Т.е. потомки пророка Якуба</span></span></span>
+      <span class="w">وَهُوَ<span class="tip"><span class="tip-word">وَهُوَ</span><span class="tip-orig">А он</span><span class="tip-ctx">Пояснение: «он же — Якуб»</span></span></span>
+      يَعْقُوبُ – عَلَيْهِ السَّلَامُ –
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">وَأَصْبَحَتْ<span class="tip"><span class="tip-word">وَأَصْبَحَتْ</span><span class="tip-orig">И стало (أَصْبَحَ — стать)</span><span class="tip-ctx">Их потомство получило прозвище</span></span></span>
+      <span class="w">ذُرِّيَّتُهُ<span class="tip"><span class="tip-word">ذُرِّيَّتُهُ</span><span class="tip-orig">Его потомство</span><span class="tip-ctx">Потомки Якуба</span></span></span>
+      <span class="w">تُلَقَّبُ<span class="tip"><span class="tip-word">تُلَقَّبُ</span><span class="tip-orig">Называться, носить прозвище (лаккаба)</span><span class="tip-ctx">Стали называться «Бану Исраиль»</span></span></span>
+      (
+      <span class="w">بِبَنِي إِسْرَائِيلَ<span class="tip"><span class="tip-word">بِبَنِي إِسْرَائِيلَ</span><span class="tip-orig">Сыновьями Израилевыми (بَنُو — сыновья, потомки)</span><span class="tip-ctx">Название народа — потомков Якуба/Израиля</span></span></span>
+      )
+      أَيْ:
+      <span class="w">أَوْلَادُ<span class="tip"><span class="tip-word">أَوْلَادُ</span><span class="tip-orig">Дети, сыновья (мн.ч. от وَلَد — ребёнок)</span><span class="tip-ctx">То есть — дети и внуки пророка</span></span></span>
+      وَأَحْفَادُ
+      <span class="w">النَّبِيِّ الصَّالِحِ<span class="tip"><span class="tip-word">النَّبِيِّ الصَّالِحِ</span><span class="tip-orig">Праведного пророка (صَالِح — праведный, благочестивый)</span><span class="tip-ctx">Якуб назван праведным пророком</span></span></span>
+      يَعْقُوبَ – عَلَيْهِ السَّلَامُ –
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">خَافَ<span class="tip"><span class="tip-word">خَافَ</span><span class="tip-orig">Испугался, испытал страх (خَافَ — бояться)</span><span class="tip-ctx">Фараон испугался роста числа бану Исраиль</span></span></span>
+      <span class="w">فِرْعَوْنُ<span class="tip"><span class="tip-word">فِرْعَوْنُ</span><span class="tip-orig">Фараон (титул правителей Египта)</span><span class="tip-ctx">Жестокий царь Египта</span></span></span>
+      –
+      <span class="w">مَلِكُ مِصْرَ آنَذَاكَ<span class="tip"><span class="tip-word">مَلِكُ مِصْرَ آنَذَاكَ</span><span class="tip-orig">Царь Египта в то время (آنَذَاكَ — тогда, в то время)</span><span class="tip-ctx">Фараон был правителем Египта в ту эпоху</span></span></span>
+      –
+      عَلَى
+      <span class="w">مُلْكِهِ<span class="tip"><span class="tip-word">مُلْكِهِ</span><span class="tip-orig">Своей власти/царстве (مُلْك — власть, царство)</span><span class="tip-ctx">Фараон боялся за свою власть</span></span></span>
+      <span class="w">وَثَرَوَاتِهِ<span class="tip"><span class="tip-word">وَثَرَوَاتِهِ</span><span class="tip-orig">И своих богатствах (ثَرَوَات — богатства)</span><span class="tip-ctx">Боялся за власть и богатства</span></span></span>
+      مِنْ
+      <span class="w">بَنِي إِسْرَائِيلَ<span class="tip"><span class="tip-word">بَنِي إِسْرَائِيلَ</span><span class="tip-orig">Сыновья Израилевы (народ)</span><span class="tip-ctx">Фараон боялся этого народа</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">فَبَدَأَ<span class="tip"><span class="tip-word">فَبَدَأَ</span><span class="tip-orig">И он начал (بَدَأَ — начинать)</span><span class="tip-ctx">Фараон начал угнетать их</span></span></span>
+      <span class="w">يَسْتَوْلِي<span class="tip"><span class="tip-word">يَسْتَوْلِي</span><span class="tip-orig">Захватывать, овладевать (اسْتَوْلَى — захватить, присвоить)</span><span class="tip-ctx">Начал отбирать их имущество</span></span></span>
+      عَلَى
+      <span class="w">أَمْوَالِهِمْ<span class="tip"><span class="tip-word">أَمْوَالِهِمْ</span><span class="tip-orig">Их имуществе, деньгах (مَال — деньги, имущество)</span><span class="tip-ctx">Фараон отбирал у них имущество</span></span></span>
+      <span class="w">وَيُعَذِّبُهُمْ<span class="tip"><span class="tip-word">وَيُعَذِّبُهُمْ</span><span class="tip-orig">И мучил их (عَذَّبَ — мучить, истязать)</span><span class="tip-ctx">Подвергал их страданиям и пыткам</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">وَفِي يَوْمٍ مِنَ الْأَيَّامِ<span class="tip"><span class="tip-word">وَفِي يَوْمٍ مِنَ الْأَيَّامِ</span><span class="tip-orig">И в один из дней (букв. «день из дней»)</span><span class="tip-ctx">Однажды фараону приснился сон</span></span></span>
+      <span class="w">رَأَى<span class="tip"><span class="tip-word">رَأَى</span><span class="tip-orig">Увидел, видел во сне (رَأَى — видеть, смотреть)</span><span class="tip-ctx">Фараон увидел во сне…</span></span></span>
+      <span class="w">فِرْعَوْنُ<span class="tip"><span class="tip-word">فِرْعَوْنُ</span><span class="tip-orig">Фараон</span><span class="tip-ctx">Фараон увидел сон</span></span></span>
+      فِي
+      <span class="w">نَوْمِهِ<span class="tip"><span class="tip-word">نَوْمِهِ</span><span class="tip-orig">Своём сне (نَوْم — сон)</span><span class="tip-ctx">Во время сна</span></span></span>
+      أَنَّ
+      <span class="w">نَارًا<span class="tip"><span class="tip-word">نَارًا</span><span class="tip-orig">Огонь (نَار — огонь, пламя)</span><span class="tip-ctx">Огонь, который он видел во сне</span></span></span>
+      <span class="w">تَخْرُجُ<span class="tip"><span class="tip-word">تَخْرُجُ</span><span class="tip-orig">Выходит, вырывается (خَرَجَ — выходить)</span><span class="tip-ctx">Огонь вырывается из Шама</span></span></span>
+      مِنَ
+      <span class="w">الشَّامِ<span class="tip"><span class="tip-word">الشَّامِ</span><span class="tip-orig">Шам — историческая Сирия (Ближний Восток)</span><span class="tip-ctx">Огонь пришёл из Леванта (Сирии/Палестины)</span></span></span>
+      <span class="w">تَحْرِقُ<span class="tip"><span class="tip-word">تَحْرِقُ</span><span class="tip-orig">Сжигает (أَحْرَقَ — сжигать)</span><span class="tip-ctx">Этот огонь сжигал дома</span></span></span>
+      <span class="w">بُيُوتَ<span class="tip"><span class="tip-word">بُيُوتَ</span><span class="tip-orig">Дома (мн.ч. от بَيْت — дом)</span><span class="tip-ctx">Дома египтян</span></span></span>
+      <span class="w">الْمِصْرِيِّينَ<span class="tip"><span class="tip-word">الْمِصْرِيِّينَ</span><span class="tip-orig">Египтян (مِصْرِيّ — египтянин)</span><span class="tip-ctx">Дома местных египтян были охвачены огнём</span></span></span>
+      <span class="w">وَقَصْرَهُ<span class="tip"><span class="tip-word">وَقَصْرَهُ</span><span class="tip-orig">И его дворец (قَصْر — дворец, замок)</span><span class="tip-ctx">Огонь охватил и дворец фараона</span></span></span>،
+      <span class="w">وَلَا تَحْرِقُ<span class="tip"><span class="tip-word">وَلَا تَحْرِقُ</span><span class="tip-orig">И не сжигает (отрицание)</span><span class="tip-ctx">Но не трогает дома израильтян</span></span></span>
+      <span class="w">بُيُوتَ<span class="tip"><span class="tip-word">بُيُوتَ</span><span class="tip-orig">Дома</span><span class="tip-ctx">Дома народа Израиля</span></span></span>
+      <span class="w">بَنِي إِسْرَائِيلَ<span class="tip"><span class="tip-word">بَنِي إِسْرَائِيلَ</span><span class="tip-orig">Сыновья Израилевы</span><span class="tip-ctx">Их дома огонь не трогал</span></span></span>،
+      <span class="w">وَجَاءَ<span class="tip"><span class="tip-word">وَجَاءَ</span><span class="tip-orig">И пришли, явились (جَاءَ — приходить)</span><span class="tip-ctx">Пришли астрологи к фараону</span></span></span>
+    </p>
+
+    <div style="height:2.5rem"></div>
+    <div class="page-num">١٣٧</div>
+  </div>
+
+  <!-- PAGE 138 -->
+  <div class="page">
+    <p class="arabic-text">
+      <span class="w">الْمُنَجِّمُونَ<span class="tip"><span class="tip-word">الْمُنَجِّمُونَ</span><span class="tip-orig">Астрологи, звездочёты (مُنَجِّم — астролог)</span><span class="tip-ctx">Придворные звездочёты, толкователи снов</span></span></span>
+      <span class="w">فَفَسَّرُوا<span class="tip"><span class="tip-word">فَفَسَّرُوا</span><span class="tip-orig">И они истолковали (فَسَّرَ — объяснять, толковать)</span><span class="tip-ctx">Астрологи растолковали сон</span></span></span>
+      لَهُ
+      <span class="w">هَذِهِ الرُّؤْيَا<span class="tip"><span class="tip-word">هَذِهِ الرُّؤْيَا</span><span class="tip-orig">Этот сон/это видение (رُؤْيَا — сон, видение)</span><span class="tip-ctx">Они растолковали этот конкретный сон</span></span></span>
+      بِأَنَّ
+      <span class="w">غُلَامًا<span class="tip"><span class="tip-word">غُلَامًا</span><span class="tip-orig">Мальчик, юноша (غُلَام — мальчик, слуга)</span><span class="tip-ctx">Родится мальчик, который…</span></span></span>
+      <span class="w">سَوْفَ يُولَدُ<span class="tip"><span class="tip-word">سَوْفَ يُولَدُ</span><span class="tip-orig">Скоро родится (وُلِدَ — быть рождённым)</span><span class="tip-ctx">Этот мальчик ещё только родится в будущем</span></span></span>
+      فِي
+      <span class="w">بَنِي إِسْرَائِيلَ<span class="tip"><span class="tip-word">بَنِي إِسْرَائِيلَ</span><span class="tip-orig">Среди сыновей Израилевых</span><span class="tip-ctx">Мальчик родится из этого народа</span></span></span>
+      <span class="w">يَكُونُ<span class="tip"><span class="tip-word">يَكُونُ</span><span class="tip-orig">Будет (كَانَ — быть)</span><span class="tip-ctx">Станет причиной гибели власти</span></span></span>
+      <span class="w">زَوَالُ<span class="tip"><span class="tip-word">زَوَالُ</span><span class="tip-orig">Падение, исчезновение (زَوَال — гибель, конец)</span><span class="tip-ctx">Конец власти фараона</span></span></span>
+      <span class="w">مُلْكِهِ<span class="tip"><span class="tip-word">مُلْكِهِ</span><span class="tip-orig">Его царства, власти</span><span class="tip-ctx">Власть фараона падёт</span></span></span>
+      <span class="w">عَلَى يَدَيْهِ<span class="tip"><span class="tip-word">عَلَى يَدَيْهِ</span><span class="tip-orig">От его рук (букв. «на его руках»)</span><span class="tip-ctx">Именно этот мальчик погубит фараона</span></span></span>.
+    </p>
+
+    <h2 class="section-title">قَتْلُ أَطْفَالِ بَنِي إِسْرَائِيلَ</h2>
+    <p style="text-align:center; font-size:0.85rem; color:#888; font-family:Georgia,serif; direction:ltr; margin-bottom:1rem;">Убийство детей сынов Израилевых</p>
+
+    <p class="arabic-text">
+      <span class="w">أَصْدَرَ<span class="tip"><span class="tip-word">أَصْدَرَ</span><span class="tip-orig">Издал, выпустил приказ (أَصْدَرَ — издавать, выпускать)</span><span class="tip-ctx">Фараон издал приказ</span></span></span>
+      <span class="w">فِرْعَوْنُ<span class="tip"><span class="tip-word">فِرْعَوْنُ</span><span class="tip-orig">Фараон</span><span class="tip-ctx">Правитель Египта</span></span></span>
+      <span class="w">الْأَوَامِرَ<span class="tip"><span class="tip-word">الْأَوَامِرَ</span><span class="tip-orig">Приказы (мн.ч. от أَمْر — приказ, повеление)</span><span class="tip-ctx">Фараон отдал приказания своим солдатам</span></span></span>
+      <span class="w">لِجُنُودِهِ<span class="tip"><span class="tip-word">لِجُنُودِهِ</span><span class="tip-orig">Своим воинам (جُنُود — воины, солдаты)</span><span class="tip-ctx">Приказ был отдан солдатам</span></span></span>
+      <span class="w">بِقَتْلِ<span class="tip"><span class="tip-word">بِقَتْلِ</span><span class="tip-orig">Убивать (قَتْل — убийство)</span><span class="tip-ctx">Приказал убивать</span></span></span>
+      <span class="w">كُلِّ<span class="tip"><span class="tip-word">كُلِّ</span><span class="tip-orig">Каждого (كُلّ — каждый, всякий)</span><span class="tip-ctx">Каждого рождённого мальчика</span></span></span>
+      <span class="w">مَوْلُودٍ<span class="tip"><span class="tip-word">مَوْلُودٍ</span><span class="tip-orig">Новорождённого (مَوْلُود — новорождённый)</span><span class="tip-ctx">Каждый рождённый ребёнок</span></span></span>
+      <span class="w">ذَكَرٍ<span class="tip"><span class="tip-word">ذَكَرٍ</span><span class="tip-orig">Мужского пола (ذَكَر — мальчик, мужчина)</span><span class="tip-ctx">Убивать именно мальчиков</span></span></span>
+      <span class="w">يُولَدُ<span class="tip"><span class="tip-word">يُولَدُ</span><span class="tip-orig">Рождается (пассивный залог от وَلَدَ)</span><span class="tip-ctx">Каждого мальчика, который родится</span></span></span>
+      مِنْ
+      <span class="w">بَنِي إِسْرَائِيلَ<span class="tip"><span class="tip-word">بَنِي إِسْرَائِيلَ</span><span class="tip-orig">Из сынов Израилевых</span><span class="tip-ctx">Убивать мальчиков только этого народа</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">وَبَدَأَ<span class="tip"><span class="tip-word">وَبَدَأَ</span><span class="tip-orig">И начали</span><span class="tip-ctx">Солдаты начали исполнять приказ</span></span></span>
+      <span class="w">الْجُنُودُ<span class="tip"><span class="tip-word">الْجُنُودُ</span><span class="tip-orig">Воины, солдаты</span><span class="tip-ctx">Солдаты фараона</span></span></span>
+      <span class="w">يُنَفِّذُونَ<span class="tip"><span class="tip-word">يُنَفِّذُونَ</span><span class="tip-orig">Исполняли, выполняли (نَفَّذَ — исполнять приказ)</span><span class="tip-ctx">Солдаты выполняли приказы</span></span></span>
+      <span class="w">الْأَوَامِرَ<span class="tip"><span class="tip-word">الْأَوَامِرَ</span><span class="tip-orig">Приказы</span><span class="tip-ctx">Приказания фараона</span></span></span>
+      <span class="w">بِذَبْحِ<span class="tip"><span class="tip-word">بِذَبْحِ</span><span class="tip-orig">Убийством, заколанием (ذَبَحَ — закалывать, резать)</span><span class="tip-ctx">Жестокое убийство — заколание</span></span></span>
+      <span class="w">الْأَبْنَاءِ<span class="tip"><span class="tip-word">الْأَبْنَاءِ</span><span class="tip-orig">Сыновей (мн.ч. от ابن — сын)</span><span class="tip-ctx">Убивали мальчиков-младенцев</span></span></span>
+      <span class="w">الَّتِي تُولَدُ<span class="tip"><span class="tip-word">الَّتِي تُولَدُ</span><span class="tip-orig">Которые рождаются</span><span class="tip-ctx">Убивали каждого новорождённого мальчика</span></span></span>.
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">فَقَالُوا<span class="tip"><span class="tip-word">فَقَالُوا</span><span class="tip-orig">И сказали (قَالَ — говорить)</span><span class="tip-ctx">Советники сказали фараону</span></span></span>
+      <span class="w">لِلْفِرْعَوْنِ<span class="tip"><span class="tip-word">لِلْفِرْعَوْنِ</span><span class="tip-orig">Фараону</span><span class="tip-ctx">Обратились к фараону с предупреждением</span></span></span>:
+      لَوْ
+      <span class="w">قَتَلْنَا<span class="tip"><span class="tip-word">قَتَلْنَا</span><span class="tip-orig">Если мы убьём (قَتَلَ — убивать)</span><span class="tip-ctx">Если продолжать убивать всех мальчиков…</span></span></span>
+      <span class="w">كَلَّ الْأَوْلَادِ<span class="tip"><span class="tip-word">كَلَّ الْأَوْلَادِ</span><span class="tip-orig">Всех детей (كُلّ — все; أَوْلَاد — дети)</span><span class="tip-ctx">Всех мальчиков бану Исраиль</span></span></span>
+      <span class="w">فَلَنْ نَجِدَ<span class="tip"><span class="tip-word">فَلَنْ نَجِدَ</span><span class="tip-orig">То мы не найдём (لَنْ — никогда не; وَجَدَ — найти)</span><span class="tip-ctx">Не останется рабочей силы</span></span></span>
+      بَعْدَ ذَلِكَ
+      <span class="w">أَحَدًا<span class="tip"><span class="tip-word">أَحَدًا</span><span class="tip-orig">Никого (أَحَد — кто-либо, кто-то)</span><span class="tip-ctx">Никого не останется</span></span></span>
+      <span class="w">يَعْمَلُ<span class="tip"><span class="tip-word">يَعْمَلُ</span><span class="tip-orig">Чтобы работал (عَمِلَ — работать, трудиться)</span><span class="tip-ctx">Некому будет работать на фараона</span></span></span>
+      <span class="w">عِنْدَنَا<span class="tip"><span class="tip-word">عِنْدَنَا</span><span class="tip-orig">У нас (عِنْد — у, при)</span><span class="tip-ctx">Работать на нас, на Египет</span></span></span>
+      <span class="w">وَيَشْتَغِلُ<span class="tip"><span class="tip-word">وَيَشْتَغِلُ</span><span class="tip-orig">И трудился (اشْتَغَلَ — заниматься работой)</span><span class="tip-ctx">Работать в полях</span></span></span>
+      فِي
+      <span class="w">حُقُولِنَا<span class="tip"><span class="tip-word">حُقُولِنَا</span><span class="tip-orig">Наших полях (حَقْل — поле, нива)</span><span class="tip-ctx">В полях и на землях Египта</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">فَأَشَارُوا<span class="tip"><span class="tip-word">فَأَشَارُوا</span><span class="tip-orig">И они указали, посоветовали (أَشَارَ — указывать, советовать)</span><span class="tip-ctx">Советники предложили решение</span></span></span>
+      <span class="w">عَلَيْهِ<span class="tip"><span class="tip-word">عَلَيْهِ</span><span class="tip-orig">Ему (фараону)</span><span class="tip-ctx">Посоветовали фараону</span></span></span>
+      أَنْ
+      <span class="w">يَقْتُلَ<span class="tip"><span class="tip-word">يَقْتُلَ</span><span class="tip-orig">Убивал (قَتَلَ — убивать)</span><span class="tip-ctx">Убивать только через год</span></span></span>
+      <span class="w">الْأَطْفَالَ<span class="tip"><span class="tip-word">الْأَطْفَالَ</span><span class="tip-orig">Детей (мн.ч. от طِفْل — ребёнок)</span><span class="tip-ctx">Детей — мальчиков</span></span></span>
+      <span class="w">الَّتِي تُولَدُ<span class="tip"><span class="tip-word">الَّتِي تُولَدُ</span><span class="tip-orig">Которые рождаются</span><span class="tip-ctx">Рождённых в этот год</span></span></span>
+      <span class="w">فِي سَنَةٍ<span class="tip"><span class="tip-word">فِي سَنَةٍ</span><span class="tip-orig">В один год (سَنَة — год)</span><span class="tip-ctx">В один конкретный год убивают</span></span></span>،
+      <span class="w">وَيَتْرُكُ<span class="tip"><span class="tip-word">وَيَتْرُكُ</span><span class="tip-orig">И оставлял (تَرَكَ — оставлять, бросать)</span><span class="tip-ctx">В следующем году оставляли в живых</span></span></span>
+      <span class="w">الْأَطْفَالَ<span class="tip"><span class="tip-word">الْأَطْفَالَ</span><span class="tip-orig">Детей</span><span class="tip-ctx">Детей следующего года</span></span></span>
+      <span class="w">الَّتِي تُولَدُ<span class="tip"><span class="tip-word">الَّتِي تُولَدُ</span><span class="tip-orig">Которые родятся</span><span class="tip-ctx">Рождённых в следующем году</span></span></span>
+      <span class="w">فِي السَّنَةِ الَّتِي تَلِيهَا<span class="tip"><span class="tip-word">فِي السَّنَةِ الَّتِي تَلِيهَا</span><span class="tip-orig">В году, который следует за ним (يَلِي — следовать, идти за чем-то)</span><span class="tip-ctx">В следующем году детей не убивали</span></span></span>.
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">فَوُلِدَ<span class="tip"><span class="tip-word">فَوُلِدَ</span><span class="tip-orig">И родился (وُلِدَ — пассив: быть рождённым)</span><span class="tip-ctx">Харун родился в «безопасный» год</span></span></span>
+      <span class="w">هَارُونُ<span class="tip"><span class="tip-word">هَارُونُ</span><span class="tip-orig">Харун — пророк Аарон</span><span class="tip-ctx">Брат Мусы, также пророк</span></span></span>
+      <span class="w">فِي السَّنَةِ<span class="tip"><span class="tip-word">فِي السَّنَةِ</span><span class="tip-orig">В году</span><span class="tip-ctx">В том году, когда детей не убивали</span></span></span>
+      <span class="w">الَّتِي لَا يُقْتَلُ فِيهَا أَطْفَالٌ<span class="tip"><span class="tip-word">الَّتِي لَا يُقْتَلُ فِيهَا أَطْفَالٌ</span><span class="tip-orig">В которой не убивают детей</span><span class="tip-ctx">Год, когда по плану детей оставляли в живых</span></span></span>،
+      <span class="w">ثُمَّ وُلِدَ<span class="tip"><span class="tip-word">ثُمَّ وُلِدَ</span><span class="tip-orig">Затем родился</span><span class="tip-ctx">После Харуна родился Муса</span></span></span>
+      <span class="w">مُوسَى<span class="tip"><span class="tip-word">مُوسَى</span><span class="tip-orig">Муса — пророк Моисей</span><span class="tip-ctx">Главный герой рассказа</span></span></span>
+      – عَلَيْهِ السَّلَامُ –
+      <span class="w">فِي السَّنَةِ الَّتِي بَعْدَهَا<span class="tip"><span class="tip-word">فِي السَّنَةِ الَّتِي بَعْدَهَا</span><span class="tip-orig">В следующем году (букв. «в году, который после него»)</span><span class="tip-ctx">Муса родился в год убийств</span></span></span>
+      <span class="w">وَهِيَ السَّنَةُ<span class="tip"><span class="tip-word">وَهِيَ السَّنَةُ</span><span class="tip-orig">А это и есть год</span><span class="tip-ctx">Именно этот год — год убийств мальчиков</span></span></span>
+      <span class="w">الَّتِي يُذْبَحُ فِيهَا الْأَطْفَالُ<span class="tip"><span class="tip-word">الَّتِي يُذْبَحُ فِيهَا الْأَطْفَالُ</span><span class="tip-orig">В которой убивают детей (يُذْبَح — быть заколотым)</span><span class="tip-ctx">В этот год всех мальчиков убивали</span></span></span>،
+    </p>
+
+    <p class="arabic-text">
+      <span class="w">فَمَاذَا تَصْنَعُ<span class="tip"><span class="tip-word">فَمَاذَا تَصْنَعُ</span><span class="tip-orig">Что же делать? (صَنَعَ — делать, поступать)</span><span class="tip-ctx">Что делать матери Мусы?</span></span></span>
+      <span class="w">أُمُّ مُوسَى<span class="tip"><span class="tip-word">أُمُّ مُوسَى</span><span class="tip-orig">Мать Мусы (أُمّ — мать)</span><span class="tip-ctx">Мать пророка Мусы оказалась в очень трудном положении</span></span></span>،
+      <span class="w">وَرِجَالُ فِرْعَوْنَ<span class="tip"><span class="tip-word">وَرِجَالُ فِرْعَوْنَ</span><span class="tip-orig">И люди фараона (رِجَال — мужчины, люди)</span><span class="tip-ctx">Солдаты и слуги фараона</span></span></span>
+      <span class="w">سَيَذْبَحُونَ<span class="tip"><span class="tip-word">سَيَذْبَحُونَ</span><span class="tip-orig">Убьют (будущее время от ذَبَحَ — заколоть)</span><span class="tip-ctx">Они придут и убьют Мусу</span></span></span>
+      <span class="w">مُوسَى<span class="tip"><span class="tip-word">مُوسَى</span><span class="tip-orig">Мусу</span><span class="tip-ctx">Новорождённого младенца Мусу</span></span></span>
+      <span class="w">كَمَا ذَبَحُوا<span class="tip"><span class="tip-word">كَمَا ذَبَحُوا</span><span class="tip-orig">Так же, как убили (كَمَا — так же, как; ذَبَحَ — заколоть)</span><span class="tip-ctx">Подобно тому, как убили многих других детей</span></span></span>
+      <span class="w">أَوْلَادًا<span class="tip"><span class="tip-word">أَوْلَادًا</span><span class="tip-orig">Детей, мальчиков</span><span class="tip-ctx">Других детей, рождённых до Мусы</span></span></span>
+      <span class="w">كَثِيرِينَ<span class="tip"><span class="tip-word">كَثِيرِينَ</span><span class="tip-orig">Многих (كَثِير — много, многий)</span><span class="tip-ctx">Много детей было убито до этого</span></span></span>
+      مِنْ قَبْلِهِ.
+    </p>
+
+    <div style="height:2.5rem"></div>
+    <div class="page-num">١٣٨</div>
+  </div>
+
+</div>
+</body>
+</html>
