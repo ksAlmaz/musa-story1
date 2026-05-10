@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قصة موسى — صفحات ١٤٢–١٤٣</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf6e3;
+  --paper: #fffef7;
+  --ink: #2c1a0e;
+  --accent: #8b2c00;
+  --gold: #b8860b;
+  --gold-light: rgba(184,134,11,0.12);
+  --border: #c9a96e;
+  --panel-bg: #0f1923;
+  --panel-border: rgba(184,134,11,0.25);
+  --tab-active: #d4a843;
+  --tab-inactive: #4a6070;
+  --green: #4caf82;
+  --blue: #5b9bd5;
+  --orange: #e8924a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Scheherazade New', 'Amiri', serif;
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  gap: 0;
+}
+
+/* ── ОСНОВНАЯ ОБЛАСТЬ ── */
+.main {
+  flex: 1;
+  padding: 3rem 2.5rem;
+  min-width: 0;
+  transition: margin-right 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.main.panel-open {
+  margin-right: 380px;
+}
+
+.label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  color: #999;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  direction: ltr;
+  margin-bottom: 1.8rem;
+}
+
+.page {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2.5rem 3rem 3rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  position: relative;
+  max-width: 680px;
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(184,134,11,.18);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+p.ar {
+  font-size: 1.7rem;
+  line-height: 3.4;
+  text-align: justify;
+  direction: rtl;
+}
+
+/* ── СЛОВО ── */
+.w {
+  display: inline;
+  cursor: pointer;
+  border-bottom: 1.5px dotted var(--gold);
+  padding: 0 2px;
+  border-radius: 2px;
+  transition: background .12s, color .12s;
+  position: relative;
+}
+
+.w:hover {
+  background: var(--gold-light);
+}
+
+.w.active {
+  background: rgba(184,134,11,0.22);
+  color: var(--accent);
+  border-bottom-style: solid;
+}
+
+/* ── HOVER ТУЛТИП (быстрый) ── */
+#quick-tip {
+  display: none;
+  position: fixed;
+  background: #1a1a1a;
+  color: #f0e8d0;
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.05rem;
+  padding: .35rem .75rem .4rem;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 999;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.08);
+  direction: rtl;
+}
+
+#quick-tip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-bottom: none;
+  border-top-color: #1a1a1a;
+}
+
+#quick-tip .qt-word { color: var(--tab-active); margin-left: .4rem; }
+#quick-tip .qt-dash { color: #666; margin: 0 .3rem; }
+#quick-tip .qt-trans { color: #ddd; }
+#quick-tip .qt-hint {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  color: #555;
+  margin-right: .5rem;
+  direction: ltr;
+  display: inline-block;
+}
+
+/* ── БОКОВАЯ ПАНЕЛЬ ── */
+#side-panel {
+  position: fixed;
+  top: 0;
+  right: -380px;
+  width: 380px;
+  height: 100vh;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+
+#side-panel.open {
+  right: 0;
+}
+
+.panel-header {
+  padding: .9rem 1.2rem .7rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.panel-word {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.8rem;
+  color: var(--tab-active);
+  direction: rtl;
+}
+
+.panel-kind {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  color: var(--green);
+  background: rgba(76,175,130,.12);
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-right: .5rem;
+}
+
+.panel-close {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: .2rem .4rem;
+  border-radius: 3px;
+  transition: color .15s, background .15s;
+  direction: ltr;
+  margin-right: auto;
+  margin-left: .5rem;
+}
+.panel-close:hover { color: #ccc; background: rgba(255,255,255,.07); }
+
+/* ── ВКЛАДКИ ── */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0;
+  direction: ltr;
+}
+
+.tab {
+  flex: 1;
+  padding: .65rem .5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  color: var(--tab-inactive);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  text-align: center;
+  letter-spacing: .03em;
+}
+
+.tab:hover { color: #8ab; }
+
+.tab.active {
+  color: var(--tab-active);
+  border-bottom-color: var(--tab-active);
+}
+
+/* ── КОНТЕНТ ВКЛАДОК ── */
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.2rem 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #2a3a4a transparent;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* вкладка 1 — Формы */
+.form-row {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  margin-bottom: .55rem;
+  font-size: .82rem;
+  line-height: 1.5;
+  direction: ltr;
+}
+
+.form-label {
+  color: #4caf82;
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 72px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+}
+
+.form-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.1rem;
+  color: #d4a843;
+  direction: rtl;
+}
+
+.form-ru { color: #c8d8e8; }
+.form-sep { border: none; border-top: 1px solid rgba(255,255,255,.06); margin: .6rem 0; }
+
+.prep-block { margin-top: .3rem; }
+.prep-item {
+  display: flex;
+  gap: .5rem;
+  align-items: baseline;
+  margin-bottom: .4rem;
+  font-size: .8rem;
+  direction: ltr;
+}
+.prep-ar { font-family: 'Scheherazade New', serif; font-size: 1rem; color: #e8924a; direction: rtl; }
+.prep-ru { color: #aec8ae; font-style: italic; }
+
+.example-block {
+  background: rgba(255,255,255,.03);
+  border-radius: 5px;
+  padding: .6rem .8rem;
+  margin-top: .5rem;
+}
+.example-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.15rem;
+  color: #d4c4a0;
+  direction: rtl;
+  display: block;
+  margin-bottom: .2rem;
+}
+.example-ru { font-size: .78rem; color: #7a9aaa; font-style: italic; direction: ltr; display: block; }
+
+/* вкладка 2 — Корень */
+.root-display {
+  text-align: center;
+  padding: 1.2rem 0 .8rem;
+}
+
+.root-letters {
+  font-family: 'Scheherazade New', serif;
+  font-size: 2.8rem;
+  color: var(--tab-active);
+  letter-spacing: .15em;
+  direction: rtl;
+  display: block;
+}
+
+.root-trans {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  color: #6a8a7a;
+  letter-spacing: .1em;
+  direction: ltr;
+  display: block;
+  margin-top: .3rem;
+}
+
+.root-sep { border: none; border-top: 1px solid rgba(184,134,11,.2); margin: .8rem 0; }
+
+.wazn-block {
+  background: rgba(184,134,11,.06);
+  border: 1px solid rgba(184,134,11,.15);
+  border-radius: 5px;
+  padding: .7rem .9rem;
+  margin-bottom: .8rem;
+}
+
+.wazn-row {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  direction: ltr;
+  margin-bottom: .3rem;
+}
+
+.wazn-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  color: #5b9bd5;
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.wazn-ar {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.2rem;
+  color: #d4a843;
+  direction: rtl;
+}
+
+.wazn-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  color: #e8924a;
+  background: rgba(232,146,74,.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.wazn-meaning {
+  font-size: .78rem;
+  color: #8ab8a8;
+  direction: ltr;
+  margin-top: .1rem;
+}
+
+.core-block {
+  margin-bottom: .8rem;
+}
+
+.core-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  color: #5b9bd5;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: .35rem;
+  display: block;
+}
+
+.core-text {
+  font-size: .85rem;
+  color: #c8d8e8;
+  line-height: 1.6;
+  direction: ltr;
+}
+
+.core-text b { color: var(--tab-active); }
+
+.family-block { margin-top: .5rem; }
+.family-item {
+  display: flex;
+  gap: .6rem;
+  align-items: baseline;
+  margin-bottom: .35rem;
+  font-size: .8rem;
+  direction: ltr;
+}
+.fam-ar { font-family: 'Scheherazade New', serif; font-size: 1.05rem; color: #d4a843; direction: rtl; min-width: 110px; }
+.fam-ru { color: #8ab8a8; }
+
+/* вкладка 3 — Образ */
+.image-block {
+  background: linear-gradient(135deg, rgba(184,134,11,.08), rgba(91,155,213,.05));
+  border: 1px solid rgba(184,134,11,.15);
+  border-radius: 8px;
+  padding: 1rem 1rem .8rem;
+  margin-bottom: .9rem;
+  text-align: center;
+}
+
+.image-icon {
+  font-size: 2.8rem;
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.image-title {
+  font-size: .85rem;
+  color: var(--tab-active);
+  font-weight: 600;
+  direction: ltr;
+  margin-bottom: .4rem;
+}
+
+.image-text {
+  font-size: .8rem;
+  color: #a8b8c8;
+  line-height: 1.65;
+  direction: ltr;
+  text-align: left;
+}
+
+.image-text b { color: #d4c4a0; }
+
+.meanings-block { margin-top: .8rem; }
+.meanings-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  color: #5b9bd5;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .5rem;
+  display: block;
+  direction: ltr;
+}
+
+.meaning-item {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: .5rem;
+  direction: ltr;
+  font-size: .8rem;
+  align-items: flex-start;
+}
+.m-icon { flex-shrink: 0; font-size: .9rem; }
+.m-ctx { color: #e8924a; font-weight: 600; flex-shrink: 0; min-width: 100px; }
+.m-ru { color: #a8c8b8; line-height: 1.5; }
+
+.antonym-block {
+  margin-top: .8rem;
+  padding: .6rem .8rem;
+  background: rgba(255,100,100,.05);
+  border: 1px solid rgba(255,100,100,.1);
+  border-radius: 5px;
+  direction: ltr;
+}
+.ant-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .63rem;
+  color: #c07070;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  display: block;
+  margin-bottom: .3rem;
+}
+.ant-row { display: flex; gap: .6rem; align-items: baseline; font-size: .8rem; }
+.ant-ar { font-family: 'Scheherazade New', serif; font-size: 1.05rem; color: #e08080; direction: rtl; }
+.ant-ru { color: #9a8a8a; }
+
+/* ── BOTTOM SHEET (мобильный) ── */
+#bottom-sheet {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--panel-bg);
+  border-top: 1px solid var(--panel-border);
+  border-radius: 16px 16px 0 0;
+  z-index: 200;
+  max-height: 80vh;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 -8px 32px rgba(0,0,0,.4);
+}
+#bottom-sheet.open { transform: translateY(0); }
+.bs-handle {
+  width: 40px; height: 4px;
+  background: rgba(255,255,255,.15);
+  border-radius: 2px;
+  margin: 10px auto 0;
+  flex-shrink: 0;
+  cursor: grab;
+}
+.bs-header {
+  padding: .7rem 1.2rem .5rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.bs-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  flex-shrink: 0;
+  direction: ltr;
+}
+.bs-tab {
+  flex: 1;
+  padding: .6rem .3rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  color: var(--tab-inactive);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  text-align: center;
+}
+.bs-tab.active { color: var(--tab-active); border-bottom-color: var(--tab-active); }
+.bs-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.2rem 2.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #2a3a4a transparent;
+}
+#bs-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 199;
+}
+#bs-overlay.open { display: block; }
+
+/* ── МОБИЛЬНАЯ БЫСТРАЯ ПОЛОСКА ── */
+#mobile-quick {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #1a1a1a;
+  border-top: 1px solid rgba(184,134,11,.3);
+  padding: .75rem 1.2rem .85rem;
+  z-index: 198;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  animation: slideUp .2s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+#mobile-quick.show { display: flex; }
+.mq-left { display: flex; align-items: baseline; gap: .5rem; flex: 1; min-width: 0; }
+.mq-word {
+  font-family: 'Scheherazade New', serif;
+  font-size: 1.3rem;
+  color: #d4a843;
+  direction: rtl;
+  white-space: nowrap;
+}
+.mq-dash { color: #555; flex-shrink: 0; }
+.mq-trans {
+  color: #ddd;
+  font-family: Georgia, serif;
+  font-size: .85rem;
+  direction: ltr;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mq-btn {
+  background: rgba(184,134,11,.15);
+  border: 1px solid rgba(184,134,11,.3);
+  color: #d4a843;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  padding: .3rem .6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.mq-btn:hover { background: rgba(184,134,11,.25); }
+
+@media (max-width: 700px) {
+  .main { padding: 1.5rem 1rem; }
+  .main.panel-open { margin-right: 0 !important; }
+  #side-panel { display: none !important; }
+  #bottom-sheet { display: flex; }
+  p.ar { font-size: 1.45rem; line-height: 3.0; }
+  .page { padding: 1.5rem 1.2rem 2rem; }
+}
+
+/* ── КНОПКА ПРЕДЛОЖЕНИЯ ── */
+.sb {
+  display: inline;
+  cursor: pointer;
+  font-size: .9rem;
+  opacity: .5;
+  transition: opacity .15s;
+  margin-right: 4px;
+}
+.sb:hover { opacity: 1; }
+
+.sp {
+  display: none;
+  direction: ltr;
+  background: #0e1c2a;
+  border-radius: 8px;
+  margin: .5rem 0 .8rem;
+  overflow: hidden;
+  font-family: Georgia, serif;
+  box-shadow: 0 4px 18px rgba(0,0,0,.25);
+}
+.sp.open { display: block; }
+.sph {
+  background: #152234;
+  padding: .55rem 1rem;
+  direction: rtl;
+  font-family: 'Scheherazade New', serif;
+  font-size: 1rem;
+  color: #c9a030;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.spb { padding: .65rem 1rem .75rem; }
+.spr { display: flex; gap: .5rem; margin-bottom: .4rem; font-size: .8rem; line-height: 1.55; }
+.spri { flex-shrink: 0; }
+.sprl { color: #7ab0cc; font-weight: bold; flex-shrink: 0; min-width: 160px; }
+.sprt { color: #ddeeff; }
+
+/* ── ЛЕГЕНДА ── */
+.legend {
+  direction: ltr;
+  font-family: Georgia, serif;
+  font-size: .78rem;
+  color: #999;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+.legend b { color: var(--accent); }
+.legend kbd {
+  background: #e8e0d0;
+  border: 1px solid #c0b090;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: .7rem;
+  color: #5a4a30;
+}
+
+/* ── ПЕРЕКЛЮЧАТЕЛЬ ХАРАКАТОВ ── */
+.harakat-wrap {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  direction: ltr;
+  margin-bottom: 1.2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .75rem;
+  color: #888;
+}
+.harakat-wrap .ar-label {
+  font-family: 'Scheherazade New', serif;
+  font-size: .95rem;
+  color: #b8860b;
+  direction: rtl;
+}
+.toggle { position: relative; width: 40px; height: 22px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute; cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #c0b090; border-radius: 22px; transition: .3s;
+}
+.slider:before {
+  position: absolute; content: '';
+  height: 16px; width: 16px; left: 3px; bottom: 3px;
+  background: white; border-radius: 50%; transition: .3s;
+}
+input:checked + .slider { background: var(--accent); }
+input:checked + .slider:before { transform: translateX(18px); }
+</style>
+</head>
+<body>
+
+<!-- БЫСТРЫЙ ТУЛТИП -->
+<div id="quick-tip">
+  <span class="qt-word" id="qt-word"></span>
+  <span class="qt-dash">—</span>
+  <span class="qt-trans" id="qt-trans"></span>
+  <span class="qt-hint">click for more</span>
+</div>
+
+<!-- БОКОВАЯ ПАНЕЛЬ -->
+<div id="side-panel">
+  <div class="panel-header">
+    <span class="panel-word" id="panel-word"></span>
+    <span class="panel-kind" id="panel-kind"></span>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="switchTab(0)">📖 Формы</button>
+    <button class="tab" onclick="switchTab(1)">🌱 Корень</button>
+    <button class="tab" onclick="switchTab(2)">🧠 Образ</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
+<!-- ОСНОВНАЯ ОБЛАСТЬ -->
+<div class="main" id="main">
+  <div class="label">قصة موسى · صفحات ١٤٢–١٤٣</div>
+  <div class="harakat-wrap">
+    <span class="ar-label">الحركات</span>
+    <label class="toggle">
+      <input type="checkbox" id="harakatToggle" checked onchange="toggleHarakat()">
+      <span class="slider"></span>
+    </label>
+    <span>Харакаты вкл/выкл</span>
+  </div>
+  <div class="legend">
+    Наведите на <b>подчёркнутое слово</b> — быстрый перевод &nbsp;|&nbsp;
+    <b>Кликните</b> — панель с вкладками &nbsp;|&nbsp;
+    На телефоне: <b>1й тап</b> = перевод, <b>2й тап</b> = подробнее
+  </div>
+<div class="page" id="page-144">
+<p class="ar">
+<span class="w" data-word="فَأَخْبَرَتَاهُ" data-kind="فعل" data-quick="и рассказали ему обе" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَخْبَرَ</span><span class="form-ru">— сообщил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُخْبِرُ</span><span class="form-ru">— сообщает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَخْبِرْ</span><span class="form-ru">— сообщи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">خَبَر — новость; إِخْبَار — оповещение; خَبِير — осведомлённый</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَخْبَرَ عَنْ</span><span class="prep-ru">— сообщил о</span></div>
+<div class="prep-item"><span class="prep-ar">أَخْبَرَ بِـ</span><span class="prep-ru">— сообщил о чём-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">خ — ب — ر</span><span class="root-trans">x·b·r</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Весть, новость, осведомлённость.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">خَبَرٌ</span><span class="fam-ru">новость</span></div>
+<div class="family-item"><span class="fam-ar">إِخْبَارٌ</span><span class="fam-ru">оповещение</span></div>
+<div class="family-item"><span class="fam-ar">خَبِيرٌ</span><span class="fam-ru">осведомлённый; الخَبِير — имя Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">📰</span><div class="image-title">Рассказать новость</div><div class="image-text">فَأَخْبَرَتَاهُ = <b>рассказали ему обе</b>. تَا = двойственное ж.р.; الهاء = ему (отцу).</div></div>'>فَأَخْبَرَتَاهُ</span>
+<span class="w" data-word="بِمَا كَانَ" data-kind="اسم موصول" data-quick="о том что произошло" data-tab0='<div class="form-row"><span class="form-label">المعنى</span><span class="form-ru" style="color:#c8d8e8">بِـ = о/про + مَا = то что — مَا المَوْصُولَة</span></div>
+<div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">كَانَ هنا = случилось, произошло</span></div>' data-tab1='<div class="core-block"><span class="core-label">مَا الموصولة</span><span class="core-text">مَا = «то что» — اسم موصول. بِمَا كَانَ = «о том что было/произошло».</span></div>' data-tab2='<div class="image-block"><span class="image-icon">💬</span><div class="image-title">О произошедшем</div><div class="image-text">بِمَا كَانَ = <b>о том что случилось</b> у колодца. Дочери рассказывают отцу всё.</div></div>'>بِمَا كَانَ</span>
+<span class="w" data-word="مِنَ الرَّجُلِ الَّذِي سَقَى لَهُمَا" data-kind="فعل" data-quick="от мужчины который напоил их" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">سَقَى</span><span class="form-ru">— напоил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَسْقِي</span><span class="form-ru">— поит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِسْقِ</span><span class="form-ru">— напои!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">س — ق — ي</span><span class="root-trans">s·q·y</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Поение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">سَقَى</span><span class="fam-ru">напоил</span></div>
+<div class="family-item"><span class="fam-ar">سِقَايَةٌ</span><span class="fam-ru">водопой</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🫗</span><div class="image-title">Тот кто напоил</div><div class="image-text">الرَّجُل الَّذِي سَقَى لَهُمَا — Муса описывается через своё действие. Его имя ещё не названо.</div></div>'>مِنَ الرَّجُلِ الَّذِي سَقَى لَهُمَا</span>
+ ، 
+<span class="w" data-word="وَسَهَّلَ لَهُمَا الْعَوْدَةَ مُبَكِّرَيْنِ" data-kind="فعل" data-quick="и облегчил им ранний возврат" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">سَهَّلَ</span><span class="form-ru">— облегчил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُسَهِّلُ</span><span class="form-ru">— облегчает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">سَهِّلْ</span><span class="form-ru">— облегчи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">سَهْل — лёгкий; سُهُولَة — лёгкость; سَهْلٌ — равнина</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">سَهَّلَ لِـ</span><span class="prep-ru">— облегчил кому-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">س — هـ — ل</span><span class="root-trans">s·h·l</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">فَعَّلَ</span><span class="wazn-num">II порода</span></div><div class="wazn-meaning">Усиленная — «сделать лёгким»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Лёгкость, равнина.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">سَهْلٌ</span><span class="fam-ru">лёгкий; равнина</span></div>
+<div class="family-item"><span class="fam-ar">سُهُولَةٌ</span><span class="fam-ru">лёгкость</span></div>
+<div class="family-item"><span class="fam-ar">مُسَهِّلٌ</span><span class="fam-ru">облегчающий</span></div>
+<div class="family-item"><span class="fam-ar">اسْتَسْهَلَ</span><span class="fam-ru">счёл лёгким</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🌅</span><div class="image-title">Ранний возврат</div><div class="image-text">مُبَكِّرَيْن = <b>рано</b>. Обычно они возвращались поздно — теперь благодаря Мусе рано. Это заметил отец.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">صَعَّبَ</span><span class="ant-ru">— усложнил</span></div></div>'>وَسَهَّلَ لَهُمَا الْعَوْدَةَ مُبَكِّرَيْنِ</span>
+ <span class="sb" onclick="toggleSent('s144_1')">📖</span>
+</p>
+<div class="sp" id="s144_1"><div class="sph">فَأَخْبَرَتَاهُ بِمَا كَانَ مِنَ الرَّجُلِ الَّذِي سَقَى لَهُمَا ، وَسَهَّلَ لَهُمَا الْعَوْدَةَ مُبَكِّرَيْنِ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И рассказали ему обе о том что было от мужчины который напоил им двоим, и облегчил им двоим возврат ранними.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Они рассказали ему о мужчине, который напоил их скот и помог им вернуться домой раньше обычного.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Дочери рассказали отцу о незнакомце — том, кто напоил их стадо и позволил вернуться домой засветло.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">فَأَخْبَرَتَاهُ: فعل مثنى مؤنث / بِمَا كَانَ: جار ومجرور / مِنَ الرَّجُلِ: بيان / الَّذِي سَقَى: صلة / وَسَهَّلَ: معطوف / مُبَكِّرَيْنِ: حال مثنى</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">مُبَكِّرَيْن — حال мثنى مذكر. Именно этот ранний возврат привлёк внимание отца — что-то случилось необычное.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَكَانَ أَبُوهُمَا" data-kind="فعل" data-quick="и был их отец" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">كَانَ</span><span class="form-ru">— был</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَكُونُ</span><span class="form-ru">— будет</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">كُنْ</span><span class="form-ru">— будь!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">فعل ناقص — неполный глагол-связка</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ك — و — ن</span><span class="root-trans">k·w·n</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Бытие, существование.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">كَانَ</span><span class="fam-ru">был</span></div>
+<div class="family-item"><span class="fam-ar">مَكَانٌ</span><span class="fam-ru">место</span></div>
+<div class="family-item"><span class="fam-ar">كَوْنٌ</span><span class="fam-ru">вселенная</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👴</span><div class="image-title">Отец-праведник</div><div class="image-text">أَبُوهُمَا = отец их двоих. هُمَا = двойственное. Шуайб — пророк Аллаха.</div></div>'>وَكَانَ أَبُوهُمَا</span>
+<span class="w" data-word="رَجُلًا صَالِحًا عَابِدًا لِلهِ" data-kind="اسم" data-quick="праведным богобоязненным мужем" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">صَالِحٌ</span><span class="form-ru">— праведный, добросердечный</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">صَالِحُونَ</span><span class="form-ru">— праведники</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">خبر كان</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">صَلَحَ — был пригоден; الإِصْلَاح — реформа; صَلَاح — благочестие</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ص — ل — ح</span><span class="root-trans">ṣ·l·ḥ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Пригодность, праведность, исправление.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">صَالِحٌ</span><span class="fam-ru">праведный</span></div>
+<div class="family-item"><span class="fam-ar">إِصْلَاحٌ</span><span class="fam-ru">реформа; исправление</span></div>
+<div class="family-item"><span class="fam-ar">مُصَالَحَةٌ</span><span class="fam-ru">примирение</span></div>
+<div class="family-item"><span class="fam-ar">صُلْحٌ</span><span class="fam-ru">мир, перемирие</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">✨</span><div class="image-title">Праведный слуга Аллаха</div><div class="image-text">صَالِح + عَابِد = <b>два определения праведности</b>: внешнее (صَالِح — добрый человек) и внутреннее (عَابِد — тот кто служит Аллаху).</div></div>'>رَجُلًا صَالِحًا عَابِدًا لِلهِ</span>
+<span class="w" data-word="عَزَّ وَجَلَّ" data-kind="اسم" data-quick="Всемогущий и Величественный" data-tab0='<div class="form-row"><span class="form-label">نوع</span><span class="form-ru" style="color:#c8d8e8">تعظيم لله — формула прославления после имени Аллаха</span></div><div class="form-row"><span class="form-label">معنى</span><span class="form-ru" style="color:#c8d8e8">عَزَّ = стал могущественным / وَجَلَّ = стал великим</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ع — ز — ز</span><span class="root-trans">ʿ·z·z</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Могущество, сила, честь.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">عَزِيزٌ</span><span class="fam-ru">могущественный; дорогой</span></div>
+<div class="family-item"><span class="fam-ar">عِزَّةٌ</span><span class="fam-ru">честь, достоинство</span></div>
+<div class="family-item"><span class="fam-ar">أَعَزَّ</span><span class="fam-ru">укрепил</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👑</span><div class="image-title">Формула тавзим</div><div class="image-text">عَزَّ وَجَلَّ = «Всемогущий и Величественный». Произносится после имени Аллаха как знак уважения.</div></div>'>عَزَّ وَجَلَّ</span>
+ ، 
+<span class="w" data-word="فَقَالَ لِإِحْدَى الْبِنْتَيْنِ" data-kind="فعل" data-quick="и сказал одной из двух дочерей" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">قَالَ</span><span class="form-ru">— сказал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَقُولُ</span><span class="form-ru">— говорит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">قُلْ</span><span class="form-ru">— скажи!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ق — و — ل</span><span class="root-trans">q·w·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Речь.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">👨👧</span><div class="image-title">Отец и дочь</div><div class="image-text">فَقَالَ لِإِحْدَى البِنْتَيْن = <b>одной из двух</b>. إِحْدَى = одна (ж.р. от أَحَد). Традиция: послать дочь с вежливым приглашением.</div></div>'>فَقَالَ لِإِحْدَى الْبِنْتَيْنِ</span>
+<span class="w" data-word="اذْهَبِي إِلَيْهِ وَقُولِي لَهُ" data-kind="فعل" data-quick="иди к нему и скажи ему" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">ذَهَبَ</span><span class="form-ru">— пошёл</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَذْهَبُ</span><span class="form-ru">— идёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِذْهَبْ</span><span class="form-ru">— иди!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">اذْهَبِي = повел. для жен.р. ед.ч.</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ذ — هـ — ب</span><span class="root-trans">ð·h·b</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Движение, уход.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">ذَهَابٌ</span><span class="fam-ru">поход</span></div>
+<div class="family-item"><span class="fam-ar">مَذْهَبٌ</span><span class="fam-ru">правовая школа</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👣</span><div class="image-title">Приглашение через дочь</div><div class="image-text">اذْهَبِي = иди (женское повелит.). Пожилой праведник посылает дочь — соблюдает приличия.</div></div>'>اذْهَبِي إِلَيْهِ وَقُولِي لَهُ</span>
+ : 
+<span class="w" data-word="إِنَّ أَبِي يَدْعُوكَ لِيَجْزِيَكَ أَجْرَ مَا سَقَيْتَ لَنَا" data-kind="فعل" data-quick="поистине отец мой зовёт тебя вознаградить за то что напоил нас" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">جَزَى</span><span class="form-ru">— воздал, вознаградил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَجْزِي</span><span class="form-ru">— воздаёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِجْزِ</span><span class="form-ru">— воздай!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">جَزَاء — воздаяние; مُجَازَاة — вознаграждение</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">جَزَاهُ اللهُ خَيْرًا</span><span class="prep-ru">— Аллах воздал ему добром</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ج — ز — ي</span><span class="root-trans">j·z·y</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Воздаяние, расплата.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">جَزَاءٌ</span><span class="fam-ru">воздаяние</span></div>
+<div class="family-item"><span class="fam-ar">مَجْزِيٌّ</span><span class="fam-ru">вознаграждённый</span></div>
+<div class="family-item"><span class="fam-ar">الجَزِيَة</span><span class="fam-ru">подушный налог</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🤝</span><div class="image-title">Честная оплата</div><div class="image-text">لِيَجْزِيَكَ أَجْرَ = <b>вознаградить тебя за труд</b>. Праведный человек не принимает помощь без благодарности.</div></div>'>إِنَّ أَبِي يَدْعُوكَ لِيَجْزِيَكَ أَجْرَ مَا سَقَيْتَ لَنَا</span>
+ <span class="sb" onclick="toggleSent('s144_2')">📖</span>
+</p>
+<div class="sp" id="s144_2"><div class="sph">وَكَانَ أَبُوهُمَا رَجُلًا صَالِحًا عَابِدًا لِلهِ عَزَّ وَجَلَّ ، فَقَالَ لِإِحْدَى الْبِنْتَيْنِ : اذْهَبِي إِلَيْهِ وَقُولِي لَهُ : إِنَّ أَبِي يَدْعُوكَ لِيَجْزِيَكَ أَجْرَ مَا سَقَيْتَ لَنَا</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И был отец их двоих мужем праведным богобоязненным Аллаху Всемогущему, и сказал одной из двух дочерей: иди к нему и скажи ему: поистине отец мой зовёт тебя чтобы воздал тебе плату того что напоил нас.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Их отец был праведным богобоязненным человеком. Он сказал одной из дочерей: «Иди к нему и скажи: мой отец зовёт тебя, чтобы вознаградить за то, что ты напоил нас».</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Их отец — праведник, всю жизнь служивший Аллаху. Он немедленно послал дочь: «Скажи ему — отец зовёт, хочет отблагодарить».</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَكَانَ أَبُوهُمَا: فعل ناقص / رَجُلًا: اسم كان / صَالِحًا عَابِدًا: نعتان / فَقَالَ: فعل / اذْهَبِي وَقُولِي: فعلا أمر للمؤنث / لِيَجْزِيَكَ: لام التعليل / أَجْرَ مَا سَقَيْتَ: مفعول به</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">أَبُوهُمَا = пророк Шуайб — يُوشَع в Библии. Он сразу послал дочь с вежливым приглашением — образец исламского адаба (этики).</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="رَأَى مُوسَى الْفَرَجَ" data-kind="فعل" data-quick="Муса увидел избавление" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">رَأَى</span><span class="form-ru">— увидел</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَرَى</span><span class="form-ru">— видит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اُنْظُرْ / رَ</span><span class="form-ru">— смотри!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">رُؤْيَة — зрение; رُؤْيَا — сон; رَأْي — мнение</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">رَأَى فِي</span><span class="prep-ru">— усмотрел в</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ر — أ — ي</span><span class="root-trans">r·ʾ·y</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Зрение, видение, мнение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">رَأْيٌ</span><span class="fam-ru">мнение</span></div>
+<div class="family-item"><span class="fam-ar">رُؤْيَةٌ</span><span class="fam-ru">зрение; видение</span></div>
+<div class="family-item"><span class="fam-ar">رُؤْيَا</span><span class="fam-ru">вещий сон</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👁️💡</span><div class="image-title">Увидел выход</div><div class="image-text">رَأَى الفَرَج = <b>увидел избавление/выход</b>. الفَرَج = просвет, облегчение. Муса понял: это ответ Аллаха на его дуа.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">أَغْمَضَ عَيْنَيْهِ</span><span class="ant-ru">— закрыл глаза</span></div></div>'>رَأَى مُوسَى الْفَرَجَ</span>
+<span class="w" data-word="فِي ذَلِكَ" data-kind="ضمير إشارة" data-quick="в этом" data-tab0='<div class="form-row"><span class="form-label">المعنى</span><span class="form-ru" style="color:#c8d8e8">в этом — فِي + ذَلِك (указат. местоимение)</span></div>
+<div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">ذَلِك = то, это (для удалённого)</span></div>' data-tab1='<div class="core-block"><span class="core-label">указание</span><span class="core-text">ذَلِك = указывает на то что только что упомянули — приглашение от праведного отца.</span></div>' data-tab2='<div class="image-block"><span class="image-icon">👆</span><div class="image-title">Это — знак</div><div class="image-text">فِي ذَلِك = <b>в этом</b>. Муса видит в приглашении Промысел Аллаха.</div></div>'>فِي ذَلِكَ</span>
+<span class="w" data-word="وَأَنَّ اللهَ قَدِ اسْتَجَابَ دُعَاءَهُ بِسُرْعَةٍ" data-kind="فعل" data-quick="и что Аллах ответил на его дуа быстро" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اسْتَجَابَ</span><span class="form-ru">— ответил (на мольбу)</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَسْتَجِيبُ</span><span class="form-ru">— отвечает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِسْتَجِبْ</span><span class="form-ru">— ответь!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">إِجَابَة — ответ; مُسْتَجَاب — принятый (о дуа)</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اسْتَجَابَ لِـ</span><span class="prep-ru">— ответил кому-то</span></div>
+<div class="prep-item"><span class="prep-ar">اسْتَجَابَ دُعَاءَ</span><span class="prep-ru">— принял мольбу</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ج — و — ب</span><span class="root-trans">j·w·b</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اسْتَفْعَلَ</span><span class="wazn-num">X порода</span></div><div class="wazn-meaning">Поиск ответа — «попросить/найти ответ»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Ответ, сторона, прохождение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">جَوَابٌ</span><span class="fam-ru">ответ</span></div>
+<div class="family-item"><span class="fam-ar">أَجَابَ</span><span class="fam-ru">ответил</span></div>
+<div class="family-item"><span class="fam-ar">مُجِيبٌ</span><span class="fam-ru">Отвечающий — имя Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🙏✅</span><div class="image-title">Немедленный ответ</div><div class="image-text">اسْتَجَابَ بِسُرْعَة = ответил <b>быстро</b>. Муса только что взмолился — и ответ пришёл. Это урок: иногда ответ на дуа приходит мгновенно.</div></div>'>وَأَنَّ اللهَ قَدِ اسْتَجَابَ دُعَاءَهُ بِسُرْعَةٍ</span>
+ ، 
+<span class="w" data-word="فَذَهَبَ مُوسَى – عَلَيْهِ السَّلَامُ – إِلَى هَذَا الرَّجُلِ الصَّالِحِ" data-kind="فعل" data-quick="и пошёл Муса к этому праведному мужу" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">ذَهَبَ</span><span class="form-ru">— пошёл</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَذْهَبُ</span><span class="form-ru">— идёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِذْهَبْ</span><span class="form-ru">— иди!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ذ — هـ — ب</span><span class="root-trans">ð·h·b</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Движение, уход.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🚶</span><div class="image-title">Муса идёт на зов</div><div class="image-text">فَذَهَبَ — фа = немедленное следствие принятого решения.</div></div>'>فَذَهَبَ مُوسَى – عَلَيْهِ السَّلَامُ – إِلَى هَذَا الرَّجُلِ الصَّالِحِ</span>
+<span class="w" data-word="فَرَحَّبَ بِهِ" data-kind="فعل" data-quick="и радушно принял его" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">رَحَّبَ</span><span class="form-ru">— приветствовал радушно</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُرَحِّبُ</span><span class="form-ru">— приветствует</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">رَحِّبْ</span><span class="form-ru">— приветствуй!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">أَهْلًا وَسَهْلًا وَمَرْحَبًا = стандартное приветствие</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">رَحَّبَ بِـ</span><span class="prep-ru">— радушно принял кого-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ر — ح — ب</span><span class="root-trans">r·ḥ·b</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">فَعَّلَ</span><span class="wazn-num">II порода</span></div><div class="wazn-meaning">Усиленная — «сделать просторным, широко принять»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Широта, простор, радушный приём.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">رَحْبٌ</span><span class="fam-ru">просторный</span></div>
+<div class="family-item"><span class="fam-ar">مَرْحَبًا</span><span class="fam-ru">добро пожаловать</span></div>
+<div class="family-item"><span class="fam-ar">رَحَابَةٌ</span><span class="fam-ru">просторность, широта</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🤗</span><div class="image-title">Широкое гостеприимство</div><div class="image-text">رَحَّبَ = <b>принял широко/просторно</b>. مَرْحَبًا буквально = «как просторно!» = добро пожаловать. Арабское гостеприимство в одном корне.</div></div>'>فَرَحَّبَ بِهِ</span>
+<span class="w" data-word="وَأَكْرَمَهُ" data-kind="فعل" data-quick="и оказал ему почёт" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَكْرَمَ</span><span class="form-ru">— оказал почёт</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُكْرِمُ</span><span class="form-ru">— оказывает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَكْرِمْ</span><span class="form-ru">— окажи почёт!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">كَرَم — щедрость; كَرِيم — щедрый/благородный; الكَرِيم — имя Аллаха</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَكْرَمَ الضَّيْف</span><span class="prep-ru">— оказал гостю почёт</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ك — ر — م</span><span class="root-trans">k·r·m</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">أَفْعَلَ</span><span class="wazn-num">IV порода</span></div><div class="wazn-meaning">«Сделать благородным, оказать честь»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Благородство, щедрость, честь.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">كَرَمٌ</span><span class="fam-ru">щедрость</span></div>
+<div class="family-item"><span class="fam-ar">كَرِيمٌ</span><span class="fam-ru">щедрый; благородный</span></div>
+<div class="family-item"><span class="fam-ar">الكَرِيمُ</span><span class="fam-ru">Щедрый — имя Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🎖️</span><div class="image-title">Честь гостю</div><div class="image-text">أَكْرَمَهُ = <b>оказал ему почёт</b>. Это исламский адаб: встретить гостя с уважением. الكَرَم (щедрость) — высшая добродетель арабов.</div></div>'>وَأَكْرَمَهُ</span>
+<span class="w" data-word="وَأَزَالَ عَنْهُ الْخَوْفَ" data-kind="فعل" data-quick="и избавил его от страха" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَزَالَ</span><span class="form-ru">— устранил, избавил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُزِيلُ</span><span class="form-ru">— устраняет</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَزِلْ</span><span class="form-ru">— устрани!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">زَوَال — исчезновение; زَالَ — исчез</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَزَالَ عَنْ</span><span class="prep-ru">— устранил от</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ز — و — ل</span><span class="root-trans">z·w·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Исчезновение, устранение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">زَالَ</span><span class="fam-ru">исчез</span></div>
+<div class="family-item"><span class="fam-ar">زَوَالٌ</span><span class="fam-ru">исчезновение</span></div>
+<div class="family-item"><span class="fam-ar">لَا يَزَالُ</span><span class="fam-ru">всё ещё; продолжает</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🕊️</span><div class="image-title">Страх ушёл</div><div class="image-text">أَزَالَ الخَوْف = <b>устранил страх</b>. Муса боялся преследования фараона — старец успокоил его.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">أَضَافَ</span><span class="ant-ru">— добавил</span></div></div>'>وَأَزَالَ عَنْهُ الْخَوْفَ</span>
+ <span class="sb" onclick="toggleSent('s144_3')">📖</span>
+</p>
+<div class="sp" id="s144_3"><div class="sph">رَأَى مُوسَى الْفَرَجَ فِي ذَلِكَ ، وَأَنَّ اللهَ قَدِ اسْتَجَابَ دُعَاءَهُ بِسُرْعَةٍ ، فَذَهَبَ مُوسَى – عَلَيْهِ السَّلَامُ – إِلَى هَذَا الرَّجُلِ الصَّالِحِ فَرَحَّبَ بِهِ وَأَكْرَمَهُ وَأَزَالَ عَنْهُ الْخَوْفَ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">Увидел Муса избавление в этом, и что Аллах уже принял мольбу его быстро, и пошёл Муса к этому мужу праведному — и принял его радушно и оказал почёт и устранил от него страх.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса увидел в этом избавление и понял, что Аллах уже быстро ответил на его дуа. Он пошёл к праведному старцу, который принял его тепло, оказал почёт и избавил от страха.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса понял: это ответ Аллаха — мгновенный, как всегда. Он пошёл к старцу. Тот встретил его с распростёртыми объятиями, окружил почётом и рассеял страх.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">رَأَى الفَرَجَ: فعل ومفعول / وَأَنَّ اللهَ: معطوف بأنَّ / قَدِ اسْتَجَابَ: توكيد / فَذَهَبَ: فعل / فَرَحَّبَ وَأَكْرَمَ وَأَزَالَ: أفعال متتالية</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">ثلاثة أفعال متتالية: رَحَّبَ → أَكْرَمَ → أَزَالَ. Три действия старца нарастают: от приветствия к почёту к устранению страха.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَعَرَضَ عَلَيْهِ" data-kind="فعل" data-quick="и предложил ему" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">عَرَضَ</span><span class="form-ru">— предложил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَعْرِضُ</span><span class="form-ru">— предлагает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِعْرِضْ</span><span class="form-ru">— предложи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">عَرْض — предложение; عَرِيض — широкий; عَرَض — случайность</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">عَرَضَ عَلَى</span><span class="prep-ru">— предложил кому-то</span></div>
+<div class="prep-item"><span class="prep-ar">عَرَضَ لِـ</span><span class="prep-ru">— представил для</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ع — ر — ض</span><span class="root-trans">ʿ·r·ḍ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Ширина, предложение, показ.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">عَرْضٌ</span><span class="fam-ru">предложение; ширина</span></div>
+<div class="family-item"><span class="fam-ar">عَرِيضٌ</span><span class="fam-ru">широкий</span></div>
+<div class="family-item"><span class="fam-ar">مَعْرُوضٌ</span><span class="fam-ru">предложенный</span></div>
+<div class="family-item"><span class="fam-ar">اعْتَرَضَ</span><span class="fam-ru">возразил</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">📋</span><div class="image-title">Предложение</div><div class="image-text">عَرَضَ عَلَيْهِ = <b>предложил ему</b>. Старец инициирует брачный договор — достойное решение.</div></div>'>وَعَرَضَ عَلَيْهِ</span>
+<span class="w" data-word="أَنْ يُزَوِّجَهُ إِحْدَى ابْنَتَيْهِ" data-kind="فعل" data-quick="жениться на одной из его дочерей" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">زَوَّجَ</span><span class="form-ru">— женил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُزَوِّجُ</span><span class="form-ru">— женит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">زَوِّجْ</span><span class="form-ru">— жени!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">زَوَاج — брак; زَوْج — супруг; تَزَوَّجَ — женился</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">زَوَّجَهُ مِنْ</span><span class="prep-ru">— женил его на</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ز — و — ج</span><span class="root-trans">z·w·j</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">فَعَّلَ</span><span class="wazn-num">II порода</span></div><div class="wazn-meaning">«Соединить в пару»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Пара, супруг, брак.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">زَوْجٌ</span><span class="fam-ru">супруг; пара</span></div>
+<div class="family-item"><span class="fam-ar">زَوَاجٌ</span><span class="fam-ru">брак</span></div>
+<div class="family-item"><span class="fam-ar">تَزَوَّجَ</span><span class="fam-ru">женился</span></div>
+<div class="family-item"><span class="fam-ar">زَوَّجَ</span><span class="fam-ru">женил</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">💍</span><div class="image-title">Брачный договор</div><div class="image-text">يُزَوِّجَهُ إِحْدَى ابْنَتَيْه = <b>выдать за него одну из дочерей</b>. Праведный старец предлагает честный договор.</div></div>'>أَنْ يُزَوِّجَهُ إِحْدَى ابْنَتَيْهِ</span>
+<span class="w" data-word="مُقَابِلَ أَنْ يَخْدُمَهُ بِرَعْيِ غَنَمِهِ ثَمَانِيَ سِنِينَ" data-kind="اسم" data-quick="взамен службы пасти скот восемь лет" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">مُقَابِلٌ</span><span class="form-ru">— взамен, напротив</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">—</span><span class="form-ru">— (нет мн.ч.)</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">ظرف — في مقابل الخدمة</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">قَابَلَ — встретил; تَقَابَلَ — встретился; مُقَابَلَة — интервью</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ق — ب — ل</span><span class="root-trans">q·b·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Принятие, противостояние, перед.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">قَبِلَ</span><span class="fam-ru">принял</span></div>
+<div class="family-item"><span class="fam-ar">أَقْبَلَ</span><span class="fam-ru">направился к</span></div>
+<div class="family-item"><span class="fam-ar">مُقَابَلَةٌ</span><span class="fam-ru">встреча; интервью</span></div>
+<div class="family-item"><span class="fam-ar">قَبْلَ</span><span class="fam-ru">до</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">⚖️</span><div class="image-title">Справедливый обмен</div><div class="image-text">مُقَابِل = <b>взамен, в обмен</b>. Восемь лет пастьбы — за брак. Справедливый честный договор.</div></div>'>مُقَابِلَ أَنْ يَخْدُمَهُ بِرَعْيِ غَنَمِهِ ثَمَانِيَ سِنِينَ</span>
+ ، 
+<span class="w" data-word="فَإِنْ أَتَمَّهَا عَشْرًا فَمِنْ عِنْدِهِ وَلَا حَرَجَ عَلَيْهِ" data-kind="فعل" data-quick="а если завершит их десятью — то по его воле, нет упрёка" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَتَمَّ</span><span class="form-ru">— завершил, довёл до конца</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُتِمُّ</span><span class="form-ru">— завершает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَتْمِمْ</span><span class="form-ru">— заверши!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">تَمَام — завершение; مُتَمِّم — завершающий; تَمَّ — свершилось</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَتَمَّ العَمَل</span><span class="prep-ru">— завершил работу</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ت — م — م</span><span class="root-trans">t·m·m</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">أَفْعَلَ</span><span class="wazn-num">IV порода</span></div><div class="wazn-meaning">«Сделать полным/завершённым»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Полнота, завершение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">تَمَّ</span><span class="fam-ru">свершилось</span></div>
+<div class="family-item"><span class="fam-ar">تَمَامٌ</span><span class="fam-ru">завершение; полнота</span></div>
+<div class="family-item"><span class="fam-ar">مُتَمِّمٌ</span><span class="fam-ru">завершающий</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">✅</span><div class="image-title">Щедрость старца</div><div class="image-text">فَمِنْ عِنْدِهِ = <b>по его собственной воле</b>. Обязательно 8 лет — но если захочет сделать 10, это его щедрость. لَا حَرَج = нет упрёка.</div></div>'>فَإِنْ أَتَمَّهَا عَشْرًا فَمِنْ عِنْدِهِ وَلَا حَرَجَ عَلَيْهِ</span>
+ ، 
+<span class="w" data-word="قَبِلَ مُوسَى ذَلِكَ وَعَمِلَ عِنْدَهُ عَشْرَ سِنِينَ" data-kind="فعل" data-quick="Муса принял это и работал у него десять лет" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">قَبِلَ</span><span class="form-ru">— принял, согласился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَقْبَلُ</span><span class="form-ru">— принимает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِقْبَلْ</span><span class="form-ru">— прими!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">قَبُول — принятие; مَقْبُول — принятый; رَفَضَ — отверг (антоним)</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">قَبِلَ العَرْض</span><span class="prep-ru">— принял предложение</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ق — ب — ل</span><span class="root-trans">q·b·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Принятие, согласие.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">قَبِلَ</span><span class="fam-ru">принял</span></div>
+<div class="family-item"><span class="fam-ar">قَبُولٌ</span><span class="fam-ru">принятие</span></div>
+<div class="family-item"><span class="fam-ar">مَقْبُولٌ</span><span class="fam-ru">принятый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🤝</span><div class="image-title">Десять лет у праведника</div><div class="image-text">قَبِلَ + عَمِلَ = принял → работал. Муса выбрал полные 10 лет — знак его благородства и верности договору.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">رَفَضَ</span><span class="ant-ru">— отверг</span></div></div>'>قَبِلَ مُوسَى ذَلِكَ وَعَمِلَ عِنْدَهُ عَشْرَ سِنِينَ</span>
+ <span class="sb" onclick="toggleSent('s144_4')">📖</span>
+</p>
+<div class="sp" id="s144_4"><div class="sph">وَعَرَضَ عَلَيْهِ أَنْ يُزَوِّجَهُ إِحْدَى ابْنَتَيْهِ مُقَابِلَ أَنْ يَخْدُمَهُ بِرَعْيِ غَنَمِهِ ثَمَانِيَ سِنِينَ ، فَإِنْ أَتَمَّهَا عَشْرًا فَمِنْ عِنْدِهِ وَلَا حَرَجَ عَلَيْهِ ، قَبِلَ مُوسَى ذَلِكَ وَعَمِلَ عِنْدَهُ عَشْرَ سِنِينَ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И предложил ему что женит его на одной из двух дочерей его взамен что служит ему пастьбой овец его восемь лет, если завершит их десятью то от него и нет упрёка на него, принял Муса то и работал у него десять лет.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Он предложил выдать за него одну из дочерей в обмен на восемь лет пастьбы его скота; если же Муса захочет доработать десять — то по своей воле, без принуждения. Муса принял и отработал у него полные десять лет.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Старец предложил: «Женись на одной из моих дочерей, а взамен паси мой скот восемь лет. Если захочешь — десять, но это твоя щедрость». Муса согласился и отработал все десять.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَعَرَضَ عَلَيْهِ: فعل / أَنْ يُزَوِّجَهُ: مصدر مؤوّل / مُقَابِلَ: ظرف / فَإِنْ أَتَمَّهَا: شرط / فَمِنْ عِنْدِهِ: جواب الشرط / قَبِلَ وَعَمِلَ: فعلان</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">هَذَا العَقْد النَّبَوِيّ يُسَمَّى «الشَّرِكَة العَادِلَة» — справедливый контракт: чётко оговорены условия, время, вознаграждение. Образец исламской этики труда.</span></div>
+</div></div>
+
+<div class="page-num" style="position:static;margin:2rem auto 0;width:2.2rem;height:2.2rem;background:var(--accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-family:'Amiri',serif">١٤٤</div>
+</div>
+
+
+<div class="page" id="page-145">
+<h2 class="chapter-title" style="text-align:center;font-size:1.7rem;font-weight:700;color:var(--accent);margin-bottom:1.4rem;line-height:1.5">مُوسَى يَعُودُ إِلَى مِصْرَ وَيُكَلِّمُ رَبَّهُ</h2>
+<p class="ar">
+<span class="w" data-word="اشْتَاقَ مُوسَى إِلَى مِصْرَ" data-kind="فعل" data-quick="Муса соскучился по Египту" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اشْتَاقَ</span><span class="form-ru">— соскучился, затосковал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَشْتَاقُ</span><span class="form-ru">— тоскует</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِشْتَقْ</span><span class="form-ru">— затоскуй!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">شَوْق — тоска, страсть; مُشْتَاق — тоскующий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اشْتَاقَ إِلَى</span><span class="prep-ru">— затосковал по</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ش — و — ق</span><span class="root-trans">š·w·q</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">Активно-возвратная — «ощутить тягу»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Страсть, тоска, тяга.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">شَوْقٌ</span><span class="fam-ru">тоска, страсть</span></div>
+<div class="family-item"><span class="fam-ar">مُشْتَاقٌ</span><span class="fam-ru">тоскующий</span></div>
+<div class="family-item"><span class="fam-ar">شَائِقٌ</span><span class="fam-ru">влекущий</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">💭</span><div class="image-title">Тоска по родине</div><div class="image-text">اشْتَاقَ = <b>испытал тягу/тоску</b>. Десять лет прошло — сердце тянется домой.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">نَسِيَ</span><span class="ant-ru">— забыл, не скучал</span></div></div>'>اشْتَاقَ مُوسَى إِلَى مِصْرَ</span>
+<span class="w" data-word="وَاشْتَاقَ إِلَى أُمِّهِ وَإِخْوَتِهِ" data-kind="اسم" data-quick="и затосковал по матери и братьям" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">أَخٌ</span><span class="form-ru">— брат</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">إِخْوَةٌ / إِخْوَانٌ</span><span class="form-ru">— братья</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">мضاف إليه — إِخْوَته</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">إِخْوَان — братья (по духу); أَخَوَات — сёстры</span></div>' data-tab1='<div class="root-display"><span class="root-letters">أ — خ — و</span><span class="root-trans">ʾ·x·w</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Братство, родство.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">أَخٌ</span><span class="fam-ru">брат</span></div>
+<div class="family-item"><span class="fam-ar">إِخْوَةٌ</span><span class="fam-ru">братья (родные)</span></div>
+<div class="family-item"><span class="fam-ar">إِخْوَانٌ</span><span class="fam-ru">братья (духовные)</span></div>
+<div class="family-item"><span class="fam-ar">أُخُوَّةٌ</span><span class="fam-ru">братство</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👨‍👩‍👦</span><div class="image-title">Семья и родина</div><div class="image-text">أُمّ + إِخْوَة = <b>семья</b>. Муса не забыл ни мать ни братьев — 10 лет спустя.</div></div>'>وَاشْتَاقَ إِلَى أُمِّهِ وَإِخْوَتِهِ</span>
+ ، 
+<span class="w" data-word="فَاخْتَارَ مَوْعِدَ الرَّحِيلِ" data-kind="فعل" data-quick="и выбрал время отъезда" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اخْتَارَ</span><span class="form-ru">— выбрал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَخْتَارُ</span><span class="form-ru">— выбирает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِخْتَرْ</span><span class="form-ru">— выбери!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">خِيَار — выбор; مُخْتَار — избранный; الخِيَرَة — лучший вариант</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اخْتَارَ مِنْ</span><span class="prep-ru">— выбрал из</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">خ — ي — ر</span><span class="root-trans">x·y·r</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">Активно-возвратная — «взять лучшее»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Добро, лучшее, выбор.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">خَيْرٌ</span><span class="fam-ru">добро; лучше</span></div>
+<div class="family-item"><span class="fam-ar">اخْتَارَ</span><span class="fam-ru">выбрал</span></div>
+<div class="family-item"><span class="fam-ar">مُخْتَارٌ</span><span class="fam-ru">избранный</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">📅</span><div class="image-title">Выбор времени</div><div class="image-text">اخْتَارَ مَوْعِد الرَّحِيل = <b>выбрал время отъезда</b>. Муса планирует — не действует импульсивно.</div></div>'>فَاخْتَارَ مَوْعِدَ الرَّحِيلِ</span>
+<span class="w" data-word="وَخَرَجَ مِنْ بِلَادِ مَدْيَنَ فِي لَيْلَةٍ مُظْلِمَةٍ وَبَارِدَةٍ" data-kind="فعل" data-quick="и вышел из Мадьяна в тёмную холодную ночь" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">لَيْلَةٌ</span><span class="form-ru">— ночь</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">لَيَالٍ</span><span class="form-ru">— ночи</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">ظرف زمان</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">لَيْلٌ — ночь (собир.); مُظْلِمَة — тёмная; بَارِدَة — холодная</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ل — ي — ل</span><span class="root-trans">l·y·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Ночь, темнота.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">لَيْلٌ</span><span class="fam-ru">ночь (собир.)</span></div>
+<div class="family-item"><span class="fam-ar">لَيْلَةٌ</span><span class="fam-ru">одна ночь</span></div>
+<div class="family-item"><span class="fam-ar">لَيْلِيٌّ</span><span class="fam-ru">ночной</span></div>
+<div class="family-item"><span class="fam-ar">إِلَيَاس</span><span class="fam-ru">библейский Илия</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🌙</span><div class="image-title">Тёмная ночь</div><div class="image-text">لَيْلَة مُظْلِمَة وَبَارِدَة = <b>тёмная и холодная ночь</b>. Два прилагательных усиливают образ: ночь особенно трудная.</div></div>'>وَخَرَجَ مِنْ بِلَادِ مَدْيَنَ فِي لَيْلَةٍ مُظْلِمَةٍ وَبَارِدَةٍ</span>
+<span class="w" data-word="وَوَصَلَ بِأَهْلِهِ إِلَى جَانِبِ جَبَلِ الطُّورِ الْأَيْمَنِ" data-kind="فعل" data-quick="и достиг с семьёй стороны правой горы Тур" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">وَصَلَ</span><span class="form-ru">— достиг, прибыл</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَصِلُ</span><span class="form-ru">— достигает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">صِلْ</span><span class="form-ru">— достигни!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">وُصُول — прибытие; وَاصَلَ — продолжил; اتَّصَلَ — позвонил</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">وَصَلَ إِلَى</span><span class="prep-ru">— достиг чего-то</span></div>
+<div class="prep-item"><span class="prep-ar">وَصَلَ بِـ</span><span class="prep-ru">— прибыл с кем-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">و — ص — ل</span><span class="root-trans">w·ṣ·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Соединение, прибытие, связь.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">وُصُولٌ</span><span class="fam-ru">прибытие</span></div>
+<div class="family-item"><span class="fam-ar">وَاصَلَ</span><span class="fam-ru">продолжил</span></div>
+<div class="family-item"><span class="fam-ar">اتَّصَلَ</span><span class="fam-ru">позвонил</span></div>
+<div class="family-item"><span class="fam-ar">وَصِيلَةٌ</span><span class="fam-ru">связь</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">⛰️</span><div class="image-title">Гора Тур</div><div class="image-text">جَبَل الطُّور = <b>гора Синай</b>. الأَيْمَن = правая сторона (مبارك — благословенная сторона). Здесь произойдёт великое — разговор с Аллахом.</div></div>'>وَوَصَلَ بِأَهْلِهِ إِلَى جَانِبِ جَبَلِ الطُّورِ الْأَيْمَنِ</span>
+ <span class="sb" onclick="toggleSent('s145_1')">📖</span>
+</p>
+<div class="sp" id="s145_1"><div class="sph">اشْتَاقَ مُوسَى إِلَى مِصْرَ ، وَاشْتَاقَ إِلَى أُمِّهِ وَإِخْوَتِهِ ، فَاخْتَارَ مَوْعِدَ الرَّحِيلِ ، وَخَرَجَ مِنْ بِلَادِ مَدْيَنَ فِي لَيْلَةٍ مُظْلِمَةٍ وَبَارِدَةٍ ، وَوَصَلَ بِأَهْلِهِ إِلَى جَانِبِ جَبَلِ الطُّورِ الْأَيْمَنِ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">Соскучился Муса по Египту и соскучился по матери его и братьям его, и выбрал время отъезда, и вышел из земель Мадьяна в ночи тёмной и холодной, и достиг с семьёй его к стороне горы Тур правой.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса соскучился по Египту, по матери и братьям. Он выбрал время для отъезда, покинул Мадьян в тёмную холодную ночь и с семьёй достиг подножья горы Синай.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Десять лет прошло. Тоска по родине и семье переполнила сердце Мусы. Он выбрал час и тронулся в путь — в тёмную холодную ночь вышел из Мадьяна и с семьёй достиг подножья горы Синай.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">اشْتَاقَ إِلَى: فعل ومتعلق / فَاخْتَارَ: فعل / مَوْعِدَ الرَّحِيل: مفعول به / فِي لَيْلَةٍ مُظْلِمَةٍ وَبَارِدَةٍ: ظرف ونعتان / وَوَصَلَ: فعل / بِأَهْلِهِ: حال / إِلَى جَانِبِ جَبَلِ: جار ومجرور</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">لَيْلَة مُظْلِمَة وَبَارِدَة — два прилагательных создают образ трудной ночи. Именно в такую ночь Аллах приготовил Мусе величайшее откровение.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَذَهَبَ يَبْحَثُ عَنِ الطَّرِيقِ" data-kind="فعل" data-quick="и пошёл искать дорогу" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">بَحَثَ</span><span class="form-ru">— искал, исследовал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَبْحَثُ</span><span class="form-ru">— ищет</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِبْحَثْ</span><span class="form-ru">— ищи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">بَحْث — поиск, исследование; بَاحِث — исследователь</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">بَحَثَ عَنْ</span><span class="prep-ru">— искал что-то</span></div>
+<div class="prep-item"><span class="prep-ar">بَحَثَ فِي</span><span class="prep-ru">— исследовал</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ب — ح — ث</span><span class="root-trans">b·ḥ·θ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Поиск, исследование, рытьё.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">بَحْثٌ</span><span class="fam-ru">поиск; исследование</span></div>
+<div class="family-item"><span class="fam-ar">بَاحِثٌ</span><span class="fam-ru">исследователь</span></div>
+<div class="family-item"><span class="fam-ar">مَبْحَثٌ</span><span class="fam-ru">тема исследования</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🔦</span><div class="image-title">Поиск в темноте</div><div class="image-text">يَبْحَثُ عَنِ الطَّرِيق = <b>ищет дорогу</b> в тёмной ночи. Муса заблудился — и тут увидел огонь.</div></div>'>وَذَهَبَ يَبْحَثُ عَنِ الطَّرِيقِ</span>
+<span class="w" data-word="فَوَجَدَ نَارًا مِنْ جَانِبِ الطُّورِ" data-kind="فعل" data-quick="и нашёл огонь со стороны горы" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">نَارٌ</span><span class="form-ru">— огонь</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">نِيرَانٌ</span><span class="form-ru">— огни</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">مفعول به وَجَدَ</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">أَشْعَلَ النَّار — разжёг огонь; نُورٌ — свет (другой корень!)</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ن — و — ر</span><span class="root-trans">n·w·r</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Свет, огонь.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">نَارٌ</span><span class="fam-ru">огонь</span></div>
+<div class="family-item"><span class="fam-ar">نُورٌ</span><span class="fam-ru">свет</span></div>
+<div class="family-item"><span class="fam-ar">مَنَارَةٌ</span><span class="fam-ru">маяк; минарет</span></div>
+<div class="family-item"><span class="fam-ar">أَنَارَ</span><span class="fam-ru">осветил</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🔥</span><div class="image-title">Огонь на горе</div><div class="image-text">نَار من جانب الطُّور = <b>огонь со стороны Синая</b>. Это не обычный огонь — это Неопалимая купина. Начало пророчества.</div></div>'>فَوَجَدَ نَارًا مِنْ جَانِبِ الطُّورِ</span>
+ ، 
+<span class="w" data-word="فَقَالَ لِأَهْلِهِ : انْتَظِرُوا" data-kind="فعل" data-quick="и сказал семье: ждите" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">انْتَظَرَ</span><span class="form-ru">— ждал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَنْتَظِرُ</span><span class="form-ru">— ждёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِنْتَظِرْ</span><span class="form-ru">— жди!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">نَظَر — ожидание; مُنْتَظَر — ожидаемый; انْتِظَار — ожидание</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">انْتَظَرَ أَنْ</span><span class="prep-ru">— ждал когда</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ن — ظ — ر</span><span class="root-trans">n·ẓ·r</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِنْتَفَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">«Смотреть в ожидании»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Взгляд, ожидание.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">نَظَرَ</span><span class="fam-ru">посмотрел</span></div>
+<div class="family-item"><span class="fam-ar">انْتَظَرَ</span><span class="fam-ru">ждал</span></div>
+<div class="family-item"><span class="fam-ar">مُنْتَظَرٌ</span><span class="fam-ru">ожидаемый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">⏳</span><div class="image-title">Муса оставляет семью ждать</div><div class="image-text">انْتَظِرُوا = <b>ждите</b>. Повелительное множественного числа. Муса идёт один к огню.</div></div>'>فَقَالَ لِأَهْلِهِ : انْتَظِرُوا</span>
+<span class="w" data-word="لَقَدْ وَجَدْتُ نَارًا" data-kind="فعل" data-quick="поистине я нашёл огонь" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">وَجَدَ</span><span class="form-ru">— нашёл</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَجِدُ</span><span class="form-ru">— находит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">جِدْ</span><span class="form-ru">— найди!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">و — ج — د</span><span class="root-trans">w·j·d</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Нахождение.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🔥</span><div class="image-title">Радостное открытие</div><div class="image-text">لَقَدْ = <b>поистине я</b>. Лам + قَدْ = усиление: «я точно нашёл!»</div></div>'>لَقَدْ وَجَدْتُ نَارًا</span>
+<span class="w" data-word="لَعَلِّي آتِيكُمْ مِنْهَا بِجَذْوَةٍ" data-kind="فعل" data-quick="быть может принесу вам от него головню" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَتَى</span><span class="form-ru">— пришёл; принёс</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَأْتِي</span><span class="form-ru">— приходит</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِئْتِ</span><span class="form-ru">— приди; принеси!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">مَجِيء — приход; الإِتْيَان — приход; أَتَى بِـ — принёс</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَتَى بِـ</span><span class="prep-ru">— принёс что-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">أ — ت — ي</span><span class="root-trans">ʾ·t·y</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Приход, принесение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">أَتَى</span><span class="fam-ru">пришёл</span></div>
+<div class="family-item"><span class="fam-ar">مَأْتًى</span><span class="fam-ru">способ прихода</span></div>
+<div class="family-item"><span class="fam-ar">اسْتَأْتَى</span><span class="fam-ru">попросил прийти</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🪵</span><div class="image-title">Головня как надежда</div><div class="image-text">لَعَلِّي = <b>быть может я</b> — выражение надежды. جَذْوَة = горящая головня. В холодной тёмной ночи огонь = спасение.</div></div>'>لَعَلِّي آتِيكُمْ مِنْهَا بِجَذْوَةٍ</span>
+<span class="w" data-word="لَعَلَّكُمْ تَسْتَدْفِئُونَ بِهَا" data-kind="فعل" data-quick="чтобы вы согрелись ею" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اسْتَدْفَأَ</span><span class="form-ru">— согрелся</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَسْتَدْفِئُ</span><span class="form-ru">— греется</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِسْتَدْفِئْ</span><span class="form-ru">— согрейся!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">دِفْء — тепло; دَافِئ — тёплый; دَفِيء — согретый</span></div>' data-tab1='<div class="root-display"><span class="root-letters">د — فـ — أ</span><span class="root-trans">d·f·ʾ</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اسْتَفْعَلَ</span><span class="wazn-num">X порода</span></div><div class="wazn-meaning">«Искать тепло»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Тепло, согревание.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">دِفْءٌ</span><span class="fam-ru">тепло</span></div>
+<div class="family-item"><span class="fam-ar">دَافِئٌ</span><span class="fam-ru">тёплый</span></div>
+<div class="family-item"><span class="fam-ar">دَفَّأَ</span><span class="fam-ru">согрел</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🌡️</span><div class="image-title">Тепло в холодную ночь</div><div class="image-text">تَسْتَدْفِئُون = <b>вы согреетесь</b>. X порода = поиск тепла. Ночь холодная — огонь жизненно необходим.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">تَبَرَّدَ</span><span class="ant-ru">— охладился</span></div></div>'>لَعَلَّكُمْ تَسْتَدْفِئُونَ بِهَا</span>
+ <span class="sb" onclick="toggleSent('s145_2')">📖</span>
+</p>
+<div class="sp" id="s145_2"><div class="sph">وَذَهَبَ يَبْحَثُ عَنِ الطَّرِيقِ ، أَوْ يَنْظُرُ حَتَّى يَرَى شَيْئًا يَهْتَدِي بِهِ إِلَى الطَّرِيقِ ، فَوَجَدَ نَارًا مِنْ جَانِبِ الطُّورِ ، فَقَالَ لِأَهْلِهِ : انْتَظِرُوا ... لَقَدْ وَجَدْتُ نَارًا لَعَلِّي آتِيكُمْ مِنْهَا بِجَذْوَةٍ لَعَلَّكُمْ تَسْتَدْفِئُونَ بِهَا</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И пошёл ищет дорогу или смотрит пока увидит что-то направляет его к дороге, и нашёл огонь со стороны Тура, и сказал семье: ждите... поистине я нашёл огонь быть может принесу вам от него головню чтобы вы согрелись ею.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Он пошёл искать дорогу или ориентир. Со стороны горы Синай он увидел огонь и сказал семье: «Ждите... Я вижу огонь — быть может принесу вам головню, чтобы согреться».</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса пошёл на поиски в темноте — и вдруг увидел огонь со стороны Синая. «Ждите», — сказал он семье. — «Вижу огонь. Принесу вам головню, чтобы согреться».</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَذَهَبَ يَبْحَثُ: فعل وحال / أَوْ يَنْظُرُ: معطوف / حَتَّى يَرَى: غاية / فَوَجَدَ نَارًا: فعل ومفعول / انْتَظِرُوا: أمر الجمع / لَقَدْ وَجَدْتُ: توكيد / لَعَلِّي: رجاء / آتِيكُم: فعل / بِجَذْوَةٍ: حال</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">لَعَلِّي آتِيكُمْ بِجَذْوَة — Муса идёт за огнём для семьи, а Аллах приготовил ему кое-что совсем иное. Это параллель: человек думает об одном, Аллах даёт другое — большее.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَوَصَلَ مُوسَى إِلَى وَادٍ بَيْنَ جَبَلَيْنِ" data-kind="فعل" data-quick="и достиг Муса долины между двух гор" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">وَصَلَ</span><span class="form-ru">— достиг, прибыл</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَصِلُ</span><span class="form-ru">— достигает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">صِلْ</span><span class="form-ru">— достигни!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">و — ص — ل</span><span class="root-trans">w·ṣ·l</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Соединение, прибытие.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🏔️</span><div class="image-title">Долина между гор</div><div class="image-text">وَادٍ بَيْنَ جَبَلَيْن = долина между двух гор. Священная долина Тува (طُوى).</div></div>'>وَوَصَلَ مُوسَى إِلَى وَادٍ بَيْنَ جَبَلَيْنِ</span>
+<span class="w" data-word="وَهُوَ يَسْتَنِدُ عَلَى عَصَاهُ" data-kind="فعل" data-quick="и он опирается на свой посох" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اسْتَنَدَ</span><span class="form-ru">— опёрся</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَسْتَنِدُ</span><span class="form-ru">— опирается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِسْتَنِدْ</span><span class="form-ru">— опрись!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">سَنَد — опора; مُسْتَنَد — документ (опора в споре)</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اسْتَنَدَ إِلَى</span><span class="prep-ru">— опёрся на</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">س — ن — د</span><span class="root-trans">s·n·d</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اسْتَفْعَلَ</span><span class="wazn-num">X порода</span></div><div class="wazn-meaning">«Искать опору»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Опора, поддержка.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">سَنَدٌ</span><span class="fam-ru">опора</span></div>
+<div class="family-item"><span class="fam-ar">مُسْتَنَدٌ</span><span class="fam-ru">документ</span></div>
+<div class="family-item"><span class="fam-ar">إِسْنَادٌ</span><span class="fam-ru">цепочка передатчиков хадиса</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🦯</span><div class="image-title">Посох пастуха</div><div class="image-text">يَسْتَنِدُ عَلَى عَصَاهُ = <b>опирается на посох</b>. Простой пастух с посохом — скоро этот посох станет знаком пророчества.</div></div>'>وَهُوَ يَسْتَنِدُ عَلَى عَصَاهُ</span>
+ ، 
+<span class="w" data-word="فَلَمَّا اقْتَرَبَ مِنَ النَّارِ" data-kind="فعل" data-quick="и когда приблизился к огню" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اقْتَرَبَ</span><span class="form-ru">— приблизился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَقْتَرِبُ</span><span class="form-ru">— приближается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِقْتَرِبْ</span><span class="form-ru">— приближайся!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">قَرِيب — близкий; تَقَرَّبَ — сблизился; قُرْب — близость</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اقْتَرَبَ مِنْ</span><span class="prep-ru">— приблизился к</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ق — ر — ب</span><span class="root-trans">q·r·b</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">Активная — «самому сократить расстояние»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Близость, приближение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">قَرِيبٌ</span><span class="fam-ru">близкий</span></div>
+<div class="family-item"><span class="fam-ar">قُرْبٌ</span><span class="fam-ru">близость</span></div>
+<div class="family-item"><span class="fam-ar">تَقَرَّبَ</span><span class="fam-ru">сблизился</span></div>
+<div class="family-item"><span class="fam-ar">مُقَرَّبٌ</span><span class="fam-ru">приближённый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🚶🔥</span><div class="image-title">Шаг к огню</div><div class="image-text">اقْتَرَبَ = <b>активно приблизился</b>. Ключевой момент: Муса сам идёт навстречу — и Аллах говорит с ним.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">ابْتَعَدَ</span><span class="ant-ru">— отдалился</span></div></div>'>فَلَمَّا اقْتَرَبَ مِنَ النَّارِ</span>
+<span class="w" data-word="وَجَدَ نَارًا عَظِيمَةً تَشْتَعِلُ فِي شَجَرَةٍ" data-kind="فعل" data-quick="нашёл огонь великий пылающий в дереве" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اشْتَعَلَ</span><span class="form-ru">— вспыхнул, запылал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَشْتَعِلُ</span><span class="form-ru">— пылает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِشْتَعِلْ</span><span class="form-ru">— вспыхни!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">شُعْلَة — пламя; مُشْتَعِل — пылающий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اشْتَعَلَ بِـ</span><span class="prep-ru">— загорелся от</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ش — ع — ل</span><span class="root-trans">š·ʿ·l</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">Активная — «самому воспламениться»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Воспламенение, пламя.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">شُعْلَةٌ</span><span class="fam-ru">пламя</span></div>
+<div class="family-item"><span class="fam-ar">مِشْعَلٌ</span><span class="fam-ru">факел</span></div>
+<div class="family-item"><span class="fam-ar">أَشْعَلَ</span><span class="fam-ru">поджёг</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🌳🔥</span><div class="image-title">Неопалимая купина</div><div class="image-text">نَار عَظِيمَة تَشْتَعِل فِي شَجَرَة = <b>Неопалимая купина</b>. Огонь горит — но дерево не сгорает. Это чудо (مُعْجِزَة).</div></div>'>وَجَدَ نَارًا عَظِيمَةً تَشْتَعِلُ فِي شَجَرَةٍ</span>
+<span class="w" data-word="وَكَانَتِ الْمَفَاجَأَةُ" data-kind="اسم" data-quick="и было это неожиданностью" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">مَفَاجَأَةٌ</span><span class="form-ru">— неожиданность, сюрприз</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">مَفَاجَآتٌ</span><span class="form-ru">— неожиданности</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">فاعل كانت</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">فَاجَأَ — застал врасплох; مُفَاجِئ — внезапный</span></div>' data-tab1='<div class="root-display"><span class="root-letters">فـ — ج — أ</span><span class="root-trans">f·j·ʾ</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">مَفْعَلَة</span><span class="wazn-num">وزن المكان/المصدر</span></div><div class="wazn-meaning">Место/время неожиданного</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Внезапность, неожиданность.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">فَجَأَةً</span><span class="fam-ru">внезапно</span></div>
+<div class="family-item"><span class="fam-ar">فَاجَأَ</span><span class="fam-ru">застал врасплох</span></div>
+<div class="family-item"><span class="fam-ar">مُفَاجَأَةٌ</span><span class="fam-ru">неожиданность</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">😲</span><div class="image-title">Великая неожиданность</div><div class="image-text">وَكَانَتِ الْمَفَاجَأَة = «<b>и это была та самая неожиданность</b>». Краткая фраза создаёт паузу перед главным откровением.</div></div>'>وَكَانَتِ الْمَفَاجَأَةُ</span>
+ <span class="sb" onclick="toggleSent('s145_3')">📖</span>
+</p>
+<div class="sp" id="s145_3"><div class="sph">وَوَصَلَ مُوسَى إِلَى وَادٍ بَيْنَ جَبَلَيْنِ وَهُوَ يَسْتَنِدُ عَلَى عَصَاهُ ، فَلَمَّا اقْتَرَبَ مِنَ النَّارِ وَجَدَ نَارًا عَظِيمَةً تَشْتَعِلُ فِي شَجَرَةٍ ، وَكَانَتِ الْمَفَاجَأَةُ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И достиг Муса долины между двух гор и он опирается на посох свой, и когда приблизился от огня нашёл огонь великий пылает в дереве, и была неожиданность.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса достиг долины между двух гор, опираясь на посох. Когда он приблизился к огню, то нашёл огромное пламя, горящее в дереве. И это оказалась Неожиданность.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса шёл, опираясь на посох. В долине между двух гор он подошёл к огню — и остановился: огромное пламя пылало в дереве. Это была та самая Неожиданность.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَوَصَلَ: فعل / وَهُوَ يَسْتَنِدُ: حال / فَلَمَّا: ظرف شرطي / اقْتَرَبَ: جواب / وَجَدَ نَارًا: فعل ومفعول / تَشْتَعِلُ: صفة / وَكَانَتِ الْمَفَاجَأَةُ: جملة اسمية قصيرة</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">وَكَانَتِ الْمَفَاجَأَةُ — короткая фраза-остановка. Рассказчик делает паузу: всё что последует дальше — величайший момент в жизни Мусы.</span></div>
+</div></div>
+
+<div class="page-num" style="position:static;margin:2rem auto 0;width:2.2rem;height:2.2rem;background:var(--accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-family:'Amiri',serif">١٤٥</div>
+</div>
+
+
+<div class="page" id="page-146">
+<h2 class="chapter-title" style="text-align:center;font-size:1.7rem;font-weight:700;color:var(--accent);margin-bottom:1.4rem;line-height:1.5">مُوسَى يُكَلِّمُ رَبَّهُ</h2>
+<p class="ar">
+<span class="w" data-word="وَاقْتَرَبَ مُوسَى" data-kind="فعل" data-quick="и приблизился Муса" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اقْتَرَبَ</span><span class="form-ru">— приблизился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَقْتَرِبُ</span><span class="form-ru">— приближается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِقْتَرِبْ</span><span class="form-ru">— приближайся!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ق — ر — ب</span><span class="root-trans">q·r·b</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Близость.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🚶🌳</span><div class="image-title">Шаг к Дереву</div><div class="image-text">اقْتَرَبَ مِنَ الشَّجَرَة = <b>приблизился к Дереву</b>. Каждый шаг Мусы — шаг к встрече с Аллахом.</div></div>'>وَاقْتَرَبَ مُوسَى</span>
+ – عَلَيْهِ السَّلَامُ – 
+<span class="w" data-word="مِنَ الشَّجَرَةِ" data-kind="اسم" data-quick="от Дерева" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">شَجَرَةٌ</span><span class="form-ru">— дерево</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">شَجَرٌ</span><span class="form-ru">— деревья</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">مضاف إليه</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">شَجَارٌ — ссора (те же ветви конфликта)</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ش — ج — ر</span><span class="root-trans">š·j·r</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Дерево, разветвление.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🌳</span><div class="image-title">Неопалимая купина</div><div class="image-text">الشَّجَرَة здесь = <b>та самая Неопалимая купина</b>. Огонь горит — дерево не сгорает. В Коране упоминается как شَجَرَة الزَّيْتُونَة.</div></div>'>مِنَ الشَّجَرَةِ</span>
+ ، 
+<span class="w" data-word="فَإِذَا بِاللهِ سُبْحَانَهُ وَتَعَالَى يُكَلِّمُهُ" data-kind="فعل" data-quick="и вдруг Аллах говорит с ним" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">كَلَّمَ</span><span class="form-ru">— говорил с</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُكَلِّمُ</span><span class="form-ru">— говорит с</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">كَلِّمْ</span><span class="form-ru">— говори с!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">كَلَام — речь; كَلِمَة — слово; مُتَكَلِّم — говорящий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">كَلَّمَهُ</span><span class="prep-ru">— говорил с ним</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ك — ل — م</span><span class="root-trans">k·l·m</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">فَعَّلَ</span><span class="wazn-num">II порода</span></div><div class="wazn-meaning">Усиленная — «заговорить с кем-то напрямую»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Слово, речь, говорение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">كَلَامٌ</span><span class="fam-ru">речь</span></div>
+<div class="family-item"><span class="fam-ar">كَلِمَةٌ</span><span class="fam-ru">слово</span></div>
+<div class="family-item"><span class="fam-ar">مُكَالَمَةٌ</span><span class="fam-ru">разговор</span></div>
+<div class="family-item"><span class="fam-ar">الكَلِيمُ</span><span class="fam-ru">тот с кем говорили = Муса</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🔊</span><div class="image-title">Прямой разговор с Аллахом</div><div class="image-text">يُكَلِّمُهُ = <b>говорит с ним</b>. Муса = كَلِيمُ اللهِ (Тот с кем говорил Аллах). Это его особый титул среди пророков.</div></div>'>فَإِذَا بِاللهِ سُبْحَانَهُ وَتَعَالَى يُكَلِّمُهُ</span>
+<span class="w" data-word="وَيُنَادِيهِ قَائِلًا لَهُ" data-kind="فعل" data-quick="и зовёт его говоря ему" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">نَادَى</span><span class="form-ru">— позвал, обратился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُنَادِي</span><span class="form-ru">— зовёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">نَادِ</span><span class="form-ru">— зови!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">نِدَاء — призыв; مُنَادٍ — зовущий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">نَادَاهُ</span><span class="prep-ru">— позвал его</span></div>
+<div class="prep-item"><span class="prep-ar">يَا = نداء</span><span class="prep-ru">— частица обращения</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ن — د — و</span><span class="root-trans">n·d·w</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Призыв, зов, обращение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">نِدَاءٌ</span><span class="fam-ru">призыв</span></div>
+<div class="family-item"><span class="fam-ar">مُنَادٍ</span><span class="fam-ru">зовущий</span></div>
+<div class="family-item"><span class="fam-ar">النَّدَاء</span><span class="fam-ru">азан — призыв к молитве</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">📣</span><div class="image-title">Зов Аллаха</div><div class="image-text">يُنَادِيهِ = <b>зовёт его</b>. Аллах обратился к Мусе лично — это مُكَالَمَة مُبَاشَرَة (прямой разговор).</div></div>'>وَيُنَادِيهِ قَائِلًا لَهُ</span>
+ : 
+<span class="w" data-word="إِنِّي أَنَا اللهُ رَبُّ الْعَالَمِينَ" data-kind="اسم" data-quick="поистине Я — Аллах Господь миров" data-tab0='<div class="form-row"><span class="form-label">المعنى</span><span class="form-ru" style="color:#c8d8e8">إِنَّ + ني = поистине Я — усиление в высшей степени</span></div>
+<div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">أَنَا = Я (для особого подчёркивания); الله = Имя; رَبُّ العَالَمِين = Господь миров</span></div>' data-tab1='<div class="core-block"><span class="core-label">العَالَمِين</span><span class="core-text">عَالَم = مир; العَالَمِين = все миры (мн.ч. разумных существ). رَبُّ العَالَمِين = Господь всех творений — первое имя в Суре Фатиха.</span></div>' data-tab2='<div class="image-block"><span class="image-icon">✨👑</span><div class="image-title">Самопредставление Аллаха</div><div class="image-text">إِنِّي أَنَا اللهُ رَبُّ الْعَالَمِين — Аллах представляется Мусе. Три уровня: إِنِّي (я) + أَنَا (именно Я) + اللهُ (моё Имя). Тройное подчёркивание.</div></div>'>إِنِّي أَنَا اللهُ رَبُّ الْعَالَمِينَ</span>
+ <span class="sb" onclick="toggleSent('s146_1')">📖</span>
+</p>
+<div class="sp" id="s146_1"><div class="sph">وَاقْتَرَبَ مُوسَى – عَلَيْهِ السَّلَامُ – مِنَ الشَّجَرَةِ ، فَإِذَا بِاللهِ – سُبْحَانَهُ وَتَعَالَى – يُكَلِّمُهُ وَيُنَادِيهِ قَائِلًا لَهُ : إِنِّي أَنَا اللهُ رَبُّ الْعَالَمِينَ</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И приблизился Муса от дерева — и вдруг Аллах Пречистый говорит с ним и зовёт его говоря ему: поистине Я — Аллах Господь миров.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса приблизился к дереву — и вдруг Аллах Пречистый и Всевышний заговорил с ним и обратился к нему: «Поистине Я — Аллах, Господь миров».</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса подошёл к дереву — и вдруг голос. Сам Аллах говорит с ним, зовёт его: «Я — Аллах. Господь всех миров».</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَاقْتَرَبَ مُوسَى: فعل وفاعل / فَإِذَا: فجائية / بِاللهِ: جار ومجرور خبر / يُكَلِّمُهُ وَيُنَادِيهِ: جملتا حال / إِنِّي: توكيد / أَنَا اللهُ: مبتدأ وخبر / رَبُّ الْعَالَمِينَ: نعت</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">كَلِيمُ اللهِ — титул Мусы. Из всех пророков именно Муса удостоился прямого разговора с Аллахом без посредника (وحي). Это его особое место среди пророков.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَخَافَ مُوسَى وَفَزِعَ" data-kind="فعل" data-quick="и испугался Муса и ужаснулся" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">فَزِعَ</span><span class="form-ru">— ужаснулся, испугался</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَفْزَعُ</span><span class="form-ru">— ужасается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">—</span><span class="form-ru">— —</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">فَزَع — ужас; مَفْزُوع — перепуганный; فَزَّعَهُ — испугал его</span></div>' data-tab1='<div class="root-display"><span class="root-letters">فـ — ز — ع</span><span class="root-trans">f·z·ʿ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Ужас, испуг, паника.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">فَزَعٌ</span><span class="fam-ru">ужас, страх</span></div>
+<div class="family-item"><span class="fam-ar">مَفْزُوعٌ</span><span class="fam-ru">перепуганный</span></div>
+<div class="family-item"><span class="fam-ar">فَزَّعَ</span><span class="fam-ru">испугал</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">😨</span><div class="image-title">Страх и ужас</div><div class="image-text">خَافَ وَفَزِعَ = <b>два вида страха</b>: خَوْف — обычный страх; فَزَع — внезапный ужас. Первая реакция даже пророка на встречу с Аллахом.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">اطْمَأَنَّ</span><span class="ant-ru">— успокоился</span></div></div>'>وَخَافَ مُوسَى وَفَزِعَ</span>
+ ، 
+<span class="w" data-word="ثُمَّ عَادَ مَرَّةً أُخْرَى إِلَى النَّارِ" data-kind="فعل" data-quick="затем вернулся ещё раз к огню" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">عَادَ</span><span class="form-ru">— вернулся</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَعُودُ</span><span class="form-ru">— возвращается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">عُدْ</span><span class="form-ru">— вернись!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ع — و — د</span><span class="root-trans">ʿ·w·d</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Возврат.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🔄</span><div class="image-title">Возвращение к огню</div><div class="image-text">ثُمَّ عَادَ = <b>вернулся</b>. Муса испугался — но Аллах зовёт снова. Пророк преодолевает страх.</div></div>'>ثُمَّ عَادَ مَرَّةً أُخْرَى إِلَى النَّارِ</span>
+<span class="w" data-word="فَنَادَاهُ رَبُّهُ" data-kind="فعل" data-quick="и позвал его Господь его" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">نَادَى</span><span class="form-ru">— позвал, обратился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُنَادِي</span><span class="form-ru">— зовёт</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">نَادِ</span><span class="form-ru">— зови!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ن — د — و</span><span class="root-trans">n·d·w</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Призыв, зов.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">📢</span><div class="image-title">Господь зовёт снова</div><div class="image-text">فَنَادَاهُ رَبُّهُ = Аллах <b>снова обратился</b>. Терпение Аллаха с пророком — образ божественной нежности.</div></div>'>فَنَادَاهُ رَبُّهُ</span>
+ : 
+<span class="w" data-word="اخْلَعْ نَعْلَيْكَ" data-kind="فعل" data-quick="сними сандалии свои" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">خَلَعَ</span><span class="form-ru">— снял (одежду/обувь)</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَخْلَعُ</span><span class="form-ru">— снимает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اخْلَعْ</span><span class="form-ru">— сними!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">خَلْع — снятие; مَخْلُوع — свергнутый; خَلَعَ الزَّوْجَة — развёлся</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">خَلَعَ نَعْلَيْهِ</span><span class="prep-ru">— снял сандалии</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">خ — ل — ع</span><span class="root-trans">x·l·ʿ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Снятие, свержение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">خَلَعَ</span><span class="fam-ru">снял</span></div>
+<div class="family-item"><span class="fam-ar">خَلْعٌ</span><span class="fam-ru">снятие</span></div>
+<div class="family-item"><span class="fam-ar">مَخْلُوعٌ</span><span class="fam-ru">свергнутый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👟</span><div class="image-title">Снять обувь перед святыней</div><div class="image-text">اخْلَعْ نَعْلَيْك = <b>сними сандалии</b>. Знак смирения перед священным местом. Традиция снимать обувь в мечети.</div></div>'>اخْلَعْ نَعْلَيْكَ</span>
+<span class="w" data-word="احْتِرَامًا وَتَقْدِيسًا وَإِجْلَالًا وَتَعْظِيمًا" data-kind="اسم" data-quick="из уважения и почитания и возвеличивания" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">احْتِرَامٌ</span><span class="form-ru">— уважение</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">—</span><span class="form-ru">— (масдар)</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">حال — объяснение причины снятия обуви</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">تَقْدِيس — освящение; إِجْلَال — возвеличивание; تَعْظِيم — восхваление</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ح — ر — م</span><span class="root-trans">ḥ·r·m</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتِعَال</span><span class="wazn-num">VIII масдар</span></div><div class="wazn-meaning">«Признание запретности/святости»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Запретность, святость, уважение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">حُرْمَةٌ</span><span class="fam-ru">святость, неприкосновенность</span></div>
+<div class="family-item"><span class="fam-ar">مُحَرَّمٌ</span><span class="fam-ru">запретный</span></div>
+<div class="family-item"><span class="fam-ar">الحَرَمُ</span><span class="fam-ru">Запретная мечеть</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🙏</span><div class="image-title">Четыре степени почтения</div><div class="image-text">Четыре слова: احْتِرَام + تَقْدِيس + إِجْلَال + تَعْظِيم — нарастание священного трепета. Каждое слово добавляет новый оттенок почтения к месту.</div></div>'>احْتِرَامًا وَتَقْدِيسًا وَإِجْلَالًا وَتَعْظِيمًا</span>
+<span class="w" data-word="إِنَّكَ بِالْوَادِي الْمُقَدَّسِ الْمُطَهَّرِ الَّذِي يُقَالُ لَهُ طُوى" data-kind="اسم" data-quick="поистине ты в освящённой очищенной долине называемой Тува" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">وَادٍ</span><span class="form-ru">— долина</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">أَوْدِيَةٌ</span><span class="form-ru">— долины</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">мضاف إليه</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">وَادِي النِّيل — долина Нила</span></div>' data-tab1='<div class="root-display"><span class="root-letters">و — د — ي</span><span class="root-trans">w·d·y</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Долина, русло.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">وَادٍ</span><span class="fam-ru">долина</span></div>
+<div class="family-item"><span class="fam-ar">أَوْدِيَةٌ</span><span class="fam-ru">долины</span></div>
+<div class="family-item"><span class="fam-ar">وَادِي السِّلِيكُون</span><span class="fam-ru">Силиконовая долина</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">⛰️✨</span><div class="image-title">Священная долина Тува</div><div class="image-text">الوَادِي الْمُقَدَّس الْمُطَهَّر = <b>освящённая и очищенная долина</b>. طُوى — имя собственное. Два прилагательных + имя = тройная святость.</div></div>'>إِنَّكَ بِالْوَادِي الْمُقَدَّسِ الْمُطَهَّرِ الَّذِي يُقَالُ لَهُ طُوى</span>
+ <span class="sb" onclick="toggleSent('s146_2')">📖</span>
+</p>
+<div class="sp" id="s146_2"><div class="sph">وَخَافَ مُوسَى وَفَزِعَ ، ثُمَّ عَادَ مَرَّةً أُخْرَى إِلَى النَّارِ ، فَنَادَاهُ رَبُّهُ : اخْلَعْ نَعْلَيْكَ احْتِرَامًا وَتَقْدِيسًا وَإِجْلَالًا وَتَعْظِيمًا إِنَّكَ بِالْوَادِي الْمُقَدَّسِ الْمُطَهَّرِ الَّذِي يُقَالُ لَهُ طُوى</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И испугался Муса и ужаснулся, затем вернулся ещё раз к огню, и позвал его Господь его: сними сандалии свои уважением и освящением и возвеличиванием и почитанием поистине ты в долине священной очищенной которой говорят ей Тува.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса испугался и ужаснулся, но потом снова подошёл к огню. Господь обратился к нему: «Сними сандалии — из уважения, почитания и возвеличивания. Ты стоишь в священной очищенной долине, именуемой Тува».</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса отпрянул — страх охватил его. Но потом вернулся. И Господь сказал: «Сними обувь — ты стоишь на священной земле. Это долина Тува».</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَخَافَ وَفَزِعَ: فعلان / ثُمَّ عَادَ: معطوف / فَنَادَاهُ رَبُّهُ: فعل وفاعل / اخْلَعْ: فعل أمر / احْتِرَامًا وَتَقْدِيسًا: مفاعيل لأجله / إِنَّكَ بِالْوَادِي: إنَّ وخبرها</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">أَرْبَعَة مَصَادِر: احْتِرَام + تَقْدِيس + إِجْلَال + تَعْظِيم — нарастание. Аллах объясняет ПОЧЕМУ нужно снять обувь — через четыре причины почтения.</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="وَأَنَا اخْتَرْتُكَ لِلرِّسَالَةِ وَتَبْلِيغِ الدَّعْوَةِ" data-kind="فعل" data-quick="и Я избрал тебя для послания и донесения призыва" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اخْتَارَ</span><span class="form-ru">— избрал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَخْتَارُ</span><span class="form-ru">— избирает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِخْتَرْ</span><span class="form-ru">— избери!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">خِيَار — выбор; مُخْتَار — избранный; الخِيَرَة — лучший выбор</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اخْتَارَهُ لِـ</span><span class="prep-ru">— избрал его для</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">خ — ي — ر</span><span class="root-trans">x·y·r</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اِفْتَعَلَ</span><span class="wazn-num">VIII порода</span></div><div class="wazn-meaning">«Взять лучшее»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Добро, выбор, лучшее.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">خَيْرٌ</span><span class="fam-ru">добро</span></div>
+<div class="family-item"><span class="fam-ar">اخْتَارَ</span><span class="fam-ru">избрал</span></div>
+<div class="family-item"><span class="fam-ar">مُخْتَارٌ</span><span class="fam-ru">избранный</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">☝️</span><div class="image-title">Избрание Богом</div><div class="image-text">اخْتَرْتُكَ = <b>Я избрал тебя</b>. Не случайность — Аллах лично выбрал Мусу. Это الاصطفاء (избрание) пророков.</div></div>'>وَأَنَا اخْتَرْتُكَ لِلرِّسَالَةِ وَتَبْلِيغِ الدَّعْوَةِ</span>
+ ، 
+<span class="w" data-word="فَاسْتَمِعْ إِلَى كُلِّ مَا يُوحَى إِلَيْكَ" data-kind="فعل" data-quick="слушай же всё что внушается тебе" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اسْتَمَعَ</span><span class="form-ru">— слушал внимательно</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَسْتَمِعُ</span><span class="form-ru">— слушает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِسْتَمِعْ</span><span class="form-ru">— слушай!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">سَمِعَ — услышал; اسْتَمَعَ — слушал (активно)</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">اسْتَمَعَ إِلَى</span><span class="prep-ru">— слушал что-то</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">س — م — ع</span><span class="root-trans">s·m·ʿ</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">اسْتَفْعَلَ</span><span class="wazn-num">X порода</span></div><div class="wazn-meaning">«Активно слушать»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Слух, слушание.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">سَمِعَ</span><span class="fam-ru">услышал</span></div>
+<div class="family-item"><span class="fam-ar">سَمَاعٌ</span><span class="fam-ru">слушание</span></div>
+<div class="family-item"><span class="fam-ar">مِسْمَعٌ</span><span class="fam-ru">ухо</span></div>
+<div class="family-item"><span class="fam-ar">السَّمِيعُ</span><span class="fam-ru">Всеслышащий — имя Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👂</span><div class="image-title">Активное слушание</div><div class="image-text">اسْتَمِعْ = <b>слушай активно</b>. X порода = искать слышания. Аллах говорит: вся твоя задача — слушать и исполнять.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">اصْمُتْ / أَغْفَلَ</span><span class="ant-ru">— молчи; пропустил мимо ушей</span></div></div>'>فَاسْتَمِعْ إِلَى كُلِّ مَا يُوحَى إِلَيْكَ</span>
+<span class="w" data-word="إِنَّنِي أَنَا اللهُ لَا إِلَهَ إِلَّا أَنَا" data-kind="اسم" data-quick="поистине Я — Аллах, нет бога кроме Меня" data-tab0='<div class="form-row"><span class="form-label">المعنى</span><span class="form-ru" style="color:#c8d8e8">إِنَّنِي = إِنَّ + ني — тройное усиление + أَنَا ещё раз</span></div>
+<div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">لَا إِلَهَ إِلَّا أَنَا = первая часть шахады</span></div>' data-tab1='<div class="core-block"><span class="core-label">الشهادة</span><span class="core-text">لَا إِلَهَ إِلَّا اللهُ — обычная форма. Здесь: لَا إِلَهَ إِلَّا أَنَا — Аллах говорит от первого лица. Это прямое откровение шахады.</span></div>' data-tab2='<div class="image-block"><span class="image-icon">☝️</span><div class="image-title">Шахада из уст Аллаха</div><div class="image-text">إِنَّنِي أَنَا اللهُ لَا إِلَهَ إِلَّا أَنَا = <b>шахада прямо от Аллаха</b> к Мусе. Откровение в чистейшей форме.</div></div>'>إِنَّنِي أَنَا اللهُ لَا إِلَهَ إِلَّا أَنَا</span>
+<span class="w" data-word="فَاعْبُدْنِي مُخْلِصًا لِوَجْهِي" data-kind="فعل" data-quick="служи же Мне искренне ради лика Моего" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">عَبَدَ</span><span class="form-ru">— поклонялся, служил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَعْبُدُ</span><span class="form-ru">— поклоняется</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اعْبُدْ</span><span class="form-ru">— служи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">عِبَادَة — поклонение; عَابِد — поклоняющийся; عَبْد — раб/слуга</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">عَبَدَ اللهَ</span><span class="prep-ru">— служил Аллаху</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ع — ب — د</span><span class="root-trans">ʿ·b·d</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Служение, поклонение, рабство.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">عِبَادَةٌ</span><span class="fam-ru">поклонение</span></div>
+<div class="family-item"><span class="fam-ar">عَابِدٌ</span><span class="fam-ru">поклоняющийся</span></div>
+<div class="family-item"><span class="fam-ar">عَبْدٌ</span><span class="fam-ru">раб Аллаха</span></div>
+<div class="family-item"><span class="fam-ar">مَعْبُودٌ</span><span class="fam-ru">объект поклонения</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🕌</span><div class="image-title">Искреннее служение</div><div class="image-text">اعْبُدْني مُخْلِصًا لِوَجْهِي = <b>служи Мне искренне ради Меня Самого</b>. مُخْلِص = искренний; لِوَجْهِي = ради лика Моего. Высшая цель ибадата.</div></div>'>فَاعْبُدْنِي مُخْلِصًا لِوَجْهِي</span>
+<span class="w" data-word="وَأَقِمِ الصَّلَاةَ لِتَذْكُرَنِي بِهَا" data-kind="فعل" data-quick="и совершай молитву чтобы поминать Меня через неё" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَقَامَ</span><span class="form-ru">— установил, совершил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُقِيمُ</span><span class="form-ru">— устанавливает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَقِمْ</span><span class="form-ru">— совершай!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">إِقَامَة — установление; القِيَام — стояние; مُقِيم — обитатель</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَقَامَ الصَّلَاة</span><span class="prep-ru">— совершил молитву</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ق — و — م</span><span class="root-trans">q·w·m</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">أَفْعَلَ</span><span class="wazn-num">IV порода</span></div><div class="wazn-meaning">«Поднять стоять»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Стояние, вставание, установление.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">قَامَ</span><span class="fam-ru">встал</span></div>
+<div class="family-item"><span class="fam-ar">قِيَامٌ</span><span class="fam-ru">стояние</span></div>
+<div class="family-item"><span class="fam-ar">مَقَامٌ</span><span class="fam-ru">стоянка; статус</span></div>
+<div class="family-item"><span class="fam-ar">أَقَامَ</span><span class="fam-ru">установил; совершил</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🙏</span><div class="image-title">Молитва как зикр</div><div class="image-text">وَأَقِمِ الصَّلَاة لِتَذْكُرَنِي = <b>молись чтобы помнить Меня</b>. Цель намаза — زِكر الله (поминание Аллаха). Коран 20:14.</div></div>'>وَأَقِمِ الصَّلَاةَ لِتَذْكُرَنِي بِهَا</span>
+ <span class="sb" onclick="toggleSent('s146_3')">📖</span>
+</p>
+<div class="sp" id="s146_3"><div class="sph">وَأَنَا اخْتَرْتُكَ لِلرِّسَالَةِ وَتَبْلِيغِ الدَّعْوَةِ فَاسْتَمِعْ إِلَى كُلِّ مَا يُوحَى إِلَيْكَ ، إِنَّنِي أَنَا اللهُ لَا إِلَهَ إِلَّا أَنَا فَاعْبُدْنِي مُخْلِصًا لِوَجْهِي وَأَقِمِ الصَّلَاةَ لِتَذْكُرَنِي بِهَا</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И Я избрал тебя для послания и донесения призыва, слушай же всё что внушается тебе, поистине Я — Аллах нет бога кроме Меня, служи же Мне искренним для лика Моего и совершай молитву чтобы поминал ты Меня через неё.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Я избрал тебя для послания и донесения призыва — слушай всё что внушается тебе. Поистине Я — Аллах, нет бога кроме Меня. Служи Мне искренне, ради Меня, и совершай молитву, чтобы поминать Меня через неё.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">«Я избрал тебя — слушай. Я — Аллах, нет никого кроме Меня. Служи Мне — только Мне. Молись — чтобы помнить Меня».</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">وَأَنَا اخْتَرْتُكَ: جملة اسمية / لِلرِّسَالَة: جار ومجرور / فَاسْتَمِعْ: أمر / إِنَّنِي أَنَا اللهُ: توكيد مضاعف / لَا إِلَهَ إِلَّا أَنَا: نفي واستثناء / فَاعْبُدْني: أمر / لِتَذْكُرَنِي: لام التعليل</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">إِنَّنِي أَنَا اللهُ — тройное усиление: إِنَّ + ني + أَنَا. Аллах подчёркивает: это именно Он говорит. لَا إِلَهَ إِلَّا أَنَا = шахада от первого лица в Коране (20:14).</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="فَهَدَأَتْ نَفْسُ مُوسَى" data-kind="فعل" data-quick="и успокоилась душа Мусы" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">هَدَأَ</span><span class="form-ru">— утих, успокоился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَهْدَأُ</span><span class="form-ru">— утихает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِهْدَأْ</span><span class="form-ru">— успокойся!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">هُدُوء — покой; هَادِئ — тихий; مُهَدِّئ — успокоительное</span></div>' data-tab1='<div class="root-display"><span class="root-letters">هـ — د — أ</span><span class="root-trans">h·d·ʾ</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Покой, тишина.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">هُدُوءٌ</span><span class="fam-ru">покой</span></div>
+<div class="family-item"><span class="fam-ar">هَادِئٌ</span><span class="fam-ru">тихий</span></div>
+<div class="family-item"><span class="fam-ar">مُهَدِّئٌ</span><span class="fam-ru">успокоительное</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">😌</span><div class="image-title">Покой после ужаса</div><div class="image-text">فَهَدَأَتْ نَفْس مُوسَى = <b>душа Мусы успокоилась</b>. Слова Аллаха рассеяли страх. Это سَكِينَة (саки́на — Божественный покой).</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">اضْطَرَبَ</span><span class="ant-ru">— взволновался</span></div></div>'>فَهَدَأَتْ نَفْسُ مُوسَى</span>
+ ، 
+<span class="w" data-word="فَكَلَّمَهُ رَبُّهُ مَرَّةً أُخْرَى" data-kind="فعل" data-quick="и говорил с ним Господь его ещё раз" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">كَلَّمَ</span><span class="form-ru">— говорил с</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُكَلِّمُ</span><span class="form-ru">— говорит с</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">كَلِّمْ</span><span class="form-ru">— говори с!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ك — ل — م</span><span class="root-trans">k·l·m</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Слово, речь.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🔊</span><div class="image-title">Продолжение разговора</div><div class="image-text">مَرَّة أُخْرَى = <b>ещё раз</b>. Аллах продолжает — диалог с пророком.</div></div>'>فَكَلَّمَهُ رَبُّهُ مَرَّةً أُخْرَى</span>
+<span class="w" data-word="وَمَا هَذِهِ الَّتِي بِيَمِينِكَ يَا مُوسَى ؟" data-kind="ضمير إشارة" data-quick="и что это в правой руке твоей о Муса?" data-tab0='<div class="form-row"><span class="form-label">المعنى</span><span class="form-ru" style="color:#c8d8e8">مَا = что? — вопросительное местоимение</span></div>
+<div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">هَذِهِ = эта (жен.р.); بِيَمِينِك = в правой руке твоей</span></div>' data-tab1='<div class="core-block"><span class="core-label">педагогика</span><span class="core-text">Аллах задаёт вопрос хотя знает ответ. Цель: заставить Мусу <b>обратить внимание</b> на то что у него в руках. Педагогический приём.</span></div>' data-tab2='<div class="image-block"><span class="image-icon">❓🪄</span><div class="image-title">Педагогический вопрос</div><div class="image-text">Аллах спрашивает «что это?» — хотя знает. Цель: <b>сосредоточить внимание Мусы на посохе</b>. Прелюдия к чуду.</div></div>'>وَمَا هَذِهِ الَّتِي بِيَمِينِكَ يَا مُوسَى ؟</span>
+<span class="w" data-word="سَأَلَهُ عَنْهَا لِيَلْفِتَ نَظَرَهُ إِلَى الْعَصَا" data-kind="فعل" data-quick="спросил его о ней чтобы привлечь его внимание к посоху" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">لَفَتَ</span><span class="form-ru">— привлёк (внимание)</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَلْفِتُ</span><span class="form-ru">— привлекает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِلْفِتْ</span><span class="form-ru">— привлеки!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">لَفْت النَّظَر — привлечение внимания; مُلْفِت — привлекающий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">لَفَتَ نَظَرَهُ إِلَى</span><span class="prep-ru">— привлёк его внимание к</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ل — فـ — ت</span><span class="root-trans">l·f·t</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Привлечение, поворот.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">لَفَتَ النَّظَر</span><span class="fam-ru">привлёк внимание</span></div>
+<div class="family-item"><span class="fam-ar">مُلْفِتٌ</span><span class="fam-ru">привлекательный, бросающийся в глаза</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👁️🪄</span><div class="image-title">Внимание к посоху</div><div class="image-text">لِيَلْفِتَ نَظَرَه = <b>чтобы привлечь его внимание</b>. لام التعليل. Посох — обычная вещь — сейчас станет знамением Аллаха.</div></div>'>سَأَلَهُ عَنْهَا لِيَلْفِتَ نَظَرَهُ إِلَى الْعَصَا</span>
+<span class="w" data-word="وَلِيُدْرِكَ عَظَمَةَ اللهِ وَقُوَّتَهُ" data-kind="فعل" data-quick="и чтобы он постиг величие Аллаха и Его мощь" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَدْرَكَ</span><span class="form-ru">— постиг, осознал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُدْرِكُ</span><span class="form-ru">— постигает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَدْرِكْ</span><span class="form-ru">— осознай!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">إِدْرَاك — постижение; مُدْرِك — осознающий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَدْرَكَ الحَقِيقَة</span><span class="prep-ru">— постиг истину</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">د — ر — ك</span><span class="root-trans">d·r·k</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">أَفْعَلَ</span><span class="wazn-num">IV порода</span></div><div class="wazn-meaning">«Достичь понимания»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Постижение, осознание, достижение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">إِدْرَاكٌ</span><span class="fam-ru">постижение</span></div>
+<div class="family-item"><span class="fam-ar">مُدْرِكٌ</span><span class="fam-ru">осознающий</span></div>
+<div class="family-item"><span class="fam-ar">تَدَارَكَ</span><span class="fam-ru">наверстал</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">💡</span><div class="image-title">Осознание величия</div><div class="image-text">لِيُدْرِكَ عَظَمَة الله = <b>чтобы он постиг</b>. Посох превратится в змею — и Муса увидит что Аллах властен над всем.</div></div>'>وَلِيُدْرِكَ عَظَمَةَ اللهِ وَقُوَّتَهُ</span>
+<span class="w" data-word="حَيْثُ يُقَلِّبُهَا إِلَى حَيَّةٍ تَسْعَى" data-kind="فعل" data-quick="когда превращает его в ползущую змею" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">قَلَّبَ</span><span class="form-ru">— перевернул, преобразил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُقَلِّبُ</span><span class="form-ru">— преображает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">قَلِّبْ</span><span class="form-ru">— преобрази!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">قَلْب — сердце; انْقِلَاب — переворот; تَقَلُّب — переменчивость</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">قَلَّبَ إِلَى</span><span class="prep-ru">— превратил в</span></div>
+<div class="prep-item"><span class="prep-ar">قَلَّبَ الأَمْر</span><span class="prep-ru">— рассмотрел со всех сторон</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ق — ل — ب</span><span class="root-trans">q·l·b</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">فَعَّلَ</span><span class="wazn-num">II порода</span></div><div class="wazn-meaning">Усиленная — «многократно перевернуть»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Сердце, переворот, превращение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">قَلْبٌ</span><span class="fam-ru">сердце; суть</span></div>
+<div class="family-item"><span class="fam-ar">انْقِلَابٌ</span><span class="fam-ru">переворот</span></div>
+<div class="family-item"><span class="fam-ar">مُتَقَلِّبٌ</span><span class="fam-ru">переменчивый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🐍</span><div class="image-title">Посох → змея</div><div class="image-text">يُقَلِّبُهَا إِلَى حَيَّة تَسْعَى = <b>превращает её в ползущую змею</b>. قَلَّبَ = II порода = интенсивное преобразование. Первое знамение Мусы.</div></div>'>حَيْثُ يُقَلِّبُهَا إِلَى حَيَّةٍ تَسْعَى</span>
+ <span class="sb" onclick="toggleSent('s146_4')">📖</span>
+</p>
+<div class="sp" id="s146_4"><div class="sph">فَهَدَأَتْ نَفْسُ مُوسَى ، فَكَلَّمَهُ رَبُّهُ مَرَّةً أُخْرَى وَقَالَ لَهُ : وَمَا هَذِهِ الَّتِي بِيَمِينِكَ يَا مُوسَى ؟ سَأَلَهُ عَنْهَا لِيَلْفِتَ نَظَرَهُ إِلَى الْعَصَا وَلِيُدْرِكَ عَظَمَةَ اللهِ وَقُوَّتَهُ حَيْثُ يُقَلِّبُهَا إِلَى حَيَّةٍ تَسْعَى</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">И успокоилась душа Мусы, и говорил с ним Господь его ещё раз и сказал ему: и что это в правой руке твоей о Муса? Спросил его о ней чтобы привлечь внимание его к посоху и чтобы он постиг величие Аллаха и мощь Его когда превращает её в змею ползущую.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Душа Мусы успокоилась. Господь снова заговорил с ним: «Что это в твоей правой руке, Муса?» — спросил Он, чтобы привлечь его внимание к посоху и дать постичь величие и мощь Аллаха, ведь Он превратит его в ползущую змею.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Душа Мусы улеглась. Господь продолжил: «Что у тебя в правой руке, Муса?» — педагогический вопрос перед чудом: посох превратится в змею.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">فَهَدَأَتْ نَفْسُ: فعل وفاعل / فَكَلَّمَهُ رَبُّهُ: فعل ومفعول وفاعل / مَا هَذِهِ: استفهام / الَّتِي بِيَمِينِكَ: صلة / لِيَلْفِتَ وَلِيُدْرِكَ: لاما التعليل / حَيْثُ يُقَلِّبُهَا: ظرف</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">سُؤَال الله رُغْم عِلْمِه — Аллах спрашивает зная ответ. Это педагогический приём: заставить Мусу сосредоточиться. Называется «السُّؤَال للتَّنْبِيه».</span></div>
+</div></div>
+
+<p class="ar">
+<span class="w" data-word="قَالَ مُوسَى مُجِيبًا لِرَبِّهِ مُطْمَئِنًّا فِي كَلَامِهِ" data-kind="فعل" data-quick="сказал Муса отвечая Господу спокойно в речи своей" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">اطْمَأَنَّ</span><span class="form-ru">— успокоился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَطْمَئِنُّ</span><span class="form-ru">— спокоен</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اِطْمَئِنَّ</span><span class="form-ru">— успокойся!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">طُمَأْنِينَة — спокойствие; مُطْمَئِنّ — спокойный; السَّكِينَة — покой</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ط — م — أ — ن</span><span class="root-trans">ṭ·m·ʾ·n</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Покой, успокоение, уверенность.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">طُمَأْنِينَةٌ</span><span class="fam-ru">спокойствие</span></div>
+<div class="family-item"><span class="fam-ar">مُطْمَئِنٌّ</span><span class="fam-ru">спокойный</span></div>
+<div class="family-item"><span class="fam-ar">اطْمَأَنَّ</span><span class="fam-ru">успокоился</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">😌</span><div class="image-title">Спокойный диалог с Богом</div><div class="image-text">مُطْمَئِنًّا فِي كَلَامِه = <b>спокойный в своей речи</b>. Муса преодолел страх и отвечает уверенно. Признак настоящего пророка.</div></div>
+<div class="antonym-block"><span class="ant-label">антоним</span><div class="ant-row"><span class="ant-ar">مُضْطَرِبٌ</span><span class="ant-ru">— взволнованный</span></div></div>'>قَالَ مُوسَى مُجِيبًا لِرَبِّهِ مُطْمَئِنًّا فِي كَلَامِهِ</span>
+ : 
+<span class="w" data-word="هِيَ عَصَايَ" data-kind="اسم" data-quick="это посох мой" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">عَصًا</span><span class="form-ru">— посох, трость</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">عِصِيٌّ</span><span class="form-ru">— посохи</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">خبر هِيَ</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">عُصْيَان — непослушание (другой корень!)</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ع — ص — و</span><span class="root-trans">ʿ·ṣ·w</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Посох, сопротивление.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">عَصًا</span><span class="fam-ru">посох</span></div>
+<div class="family-item"><span class="fam-ar">عِصِيٌّ</span><span class="fam-ru">посохи</span></div>
+<div class="family-item"><span class="fam-ar">عَصَا مُوسَى</span><span class="fam-ru">посох Мусы — знаменитый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🪄</span><div class="image-title">Обычный посох</div><div class="image-text">هِيَ عَصَايَ = «<b>это мой посох</b>». Простой ответ простого пастуха. Но этот посох — уже не обычный предмет.</div></div>'>هِيَ عَصَايَ</span>
+<span class="w" data-word="أَتَوَكَّأُ عَلَيْهَا وَأَسْقُطُ الْوَرَقَ عَلَى غَنَمِي" data-kind="فعل" data-quick="опираюсь на него и стряхиваю листья на овец моих" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">تَوَكَّأَ</span><span class="form-ru">— опёрся</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَتَوَكَّأُ</span><span class="form-ru">— опирается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">تَوَكَّأْ</span><span class="form-ru">— опрись!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">وِكَاء — завязка; وِكَاء السُّرَّة — пуповина</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">تَوَكَّأَ عَلَى</span><span class="prep-ru">— опёрся на</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">و — ك — أ</span><span class="root-trans">w·k·ʾ</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">تَفَعَّلَ</span><span class="wazn-num">V порода</span></div><div class="wazn-meaning">«Опереться на»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Опора.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">تَوَكَّأَ</span><span class="fam-ru">опёрся</span></div>
+<div class="family-item"><span class="fam-ar">مُتَوَكِّئٌ</span><span class="fam-ru">опирающийся</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🪄🌿</span><div class="image-title">Посох пастуха</div><div class="image-text">أَتَوَكَّأُ + أَسْقُطُ الوَرَق = два использования посоха. Муса любовно описывает свой посох — скоро он увидит его настоящую силу.</div></div>'>أَتَوَكَّأُ عَلَيْهَا وَأَسْقُطُ الْوَرَقَ عَلَى غَنَمِي</span>
+<span class="w" data-word="وَلِيَ فِيهَا مَآرِبُ أُخْرَى" data-kind="اسم" data-quick="и для меня в нём другие нужды" data-tab0='<div class="form-row"><span class="form-label">مفرد</span><span class="form-ar">مَأْرَبٌ</span><span class="form-ru">— нужда, потребность</span></div>
+<div class="form-row"><span class="form-label">جمع</span><span class="form-ar">مَآرِبُ</span><span class="form-ru">— нужды, потребности</span></div>
+<div class="form-row"><span class="form-label">في النص</span><span class="form-ru" style="color:#c8d8e8">فاعل لي</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">أَرَب — нужда; الإِرَب — умение; أُرَبِيٌّ — прагматичный</span></div>' data-tab1='<div class="root-display"><span class="root-letters">أ — ر — ب</span><span class="root-trans">ʾ·r·b</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Нужда, потребность, умение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">مَأْرَبٌ</span><span class="fam-ru">нужда; потребность</span></div>
+<div class="family-item"><span class="fam-ar">إِرْبٌ</span><span class="fam-ru">умение</span></div>
+<div class="family-item"><span class="fam-ar">أَرَبٌ</span><span class="fam-ru">нужда</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">📝</span><div class="image-title">И другое</div><div class="image-text">مَآرِب أُخْرَى = «<b>и другие нужды</b>». Муса не перечисляет все — намекает что польза многообразна. Скромность и поэтичность ответа.</div></div>'>وَلِيَ فِيهَا مَآرِبُ أُخْرَى</span>
+ ؛ 
+<span class="w" data-word="فَأَمَرَهُ اللهُ أَنْ يُلْقِيَ هَذِهِ الْعَصَا" data-kind="فعل" data-quick="и приказал ему Аллах бросить этот посох" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَمَرَ</span><span class="form-ru">— приказал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَأْمُرُ</span><span class="form-ru">— приказывает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">اُأْمُرْ</span><span class="form-ru">— прикажи!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">أَمْر — приказ, дело; مَأْمُور — подчинённый</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَمَرَهُ بِـ / أَنْ</span><span class="prep-ru">— приказал ему что-то сделать</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">أ — م — ر</span><span class="root-trans">ʾ·m·r</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Приказ, дело, командование.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">أَمْرٌ</span><span class="fam-ru">приказ; дело</span></div>
+<div class="family-item"><span class="fam-ar">أَمِيرٌ</span><span class="fam-ru">принц; командир</span></div>
+<div class="family-item"><span class="fam-ar">مَأْمُورٌ</span><span class="fam-ru">подчинённый</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">👆</span><div class="image-title">Приказ Аллаха</div><div class="image-text">فَأَمَرَهُ = <b>приказал ему</b>. Прямой приказ — брось посох. Акт послушания.</div></div>'>فَأَمَرَهُ اللهُ أَنْ يُلْقِيَ هَذِهِ الْعَصَا</span>
+<span class="w" data-word="فَإِذَا بِهَا تَتَحَوَّلُ إِلَى ثُعْبَانٍ كَبِيرٍ يَتَحَرَّكُ عَلَى الْأَرْضِ وَيَلْتَهِمُ كُلَّ شَيْءٍ" data-kind="فعل" data-quick="и вдруг она превращается в огромную змею движущуюся и пожирающую всё" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">تَحَوَّلَ</span><span class="form-ru">— превратился</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَتَحَوَّلُ</span><span class="form-ru">— превращается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">تَحَوَّلْ</span><span class="form-ru">— превратись!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">تَحَوُّل — превращение; مُتَحَوِّل — изменчивый</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">تَحَوَّلَ إِلَى</span><span class="prep-ru">— превратился в</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">ح — و — ل</span><span class="root-trans">ḥ·w·l</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">تَفَعَّلَ</span><span class="wazn-num">V порода</span></div><div class="wazn-meaning">Возвратная — «претерпеть изменение»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Изменение, превращение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">حَالَ</span><span class="fam-ru">изменился</span></div>
+<div class="family-item"><span class="fam-ar">تَحَوَّلَ</span><span class="fam-ru">превратился</span></div>
+<div class="family-item"><span class="fam-ar">حَوْلٌ</span><span class="fam-ru">год; мощь</span></div>
+<div class="family-item"><span class="fam-ar">لَا حَوْلَ إِلَّا بِاللهِ</span><span class="fam-ru">нет силы кроме как от Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">🐍</span><div class="image-title">Посох стал змеёй</div><div class="image-text">تَتَحَوَّلُ إِلَى ثُعْبَان كَبِير = <b>превращается в огромную змею</b>. فَإِذَا = внезапно. Чудо мгновенное.</div></div>'>فَإِذَا بِهَا تَتَحَوَّلُ إِلَى ثُعْبَانٍ كَبِيرٍ يَتَحَرَّكُ عَلَى الْأَرْضِ وَيَلْتَهِمُ كُلَّ شَيْءٍ</span>
+ ، 
+<span class="w" data-word="فَخَافَ مُوسَى وَتَمَلَّكَهُ الْفَزَعُ" data-kind="فعل" data-quick="и испугался Муса и овладел им ужас" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">تَمَلَّكَ</span><span class="form-ru">— овладел, захватил</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَتَمَلَّكُ</span><span class="form-ru">— овладевает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">تَمَلَّكْ</span><span class="form-ru">— овладей!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">مَلَكَ — владел; مَلِك — царь; تَمَلَّكَ العَقْل — завладел разумом</span></div>' data-tab1='<div class="root-display"><span class="root-letters">م — ل — ك</span><span class="root-trans">m·l·k</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">تَفَعَّلَ</span><span class="wazn-num">V порода</span></div><div class="wazn-meaning">Возвратная — «стать полным хозяином»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Власть, владение.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">مَلَكَ</span><span class="fam-ru">владел</span></div>
+<div class="family-item"><span class="fam-ar">مِلْكٌ</span><span class="fam-ru">собственность</span></div>
+<div class="family-item"><span class="fam-ar">تَمَلَّكَ</span><span class="fam-ru">овладел</span></div>
+<div class="family-item"><span class="fam-ar">المَلِكُ</span><span class="fam-ru">Царь — имя Аллаха</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">😱</span><div class="image-title">Ужас овладел им</div><div class="image-text">تَمَلَّكَهُ الفَزَع = <b>ужас овладел им</b>. Красивый образ: ужас как «хозяин» захватывает человека. تَمَلَّكَ + объект = захватил полностью.</div></div>'>فَخَافَ مُوسَى وَتَمَلَّكَهُ الْفَزَعُ</span>
+ ، 
+<span class="w" data-word="فَأَمَرَهُ اللهُ أَنْ يُمْسِكَ الثُّعْبَانَ" data-kind="فعل" data-quick="и приказал ему Аллах схватить змею" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">أَمْسَكَ</span><span class="form-ru">— схватил, удержал</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يُمْسِكُ</span><span class="form-ru">— удерживает</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">أَمْسِكْ</span><span class="form-ru">— схвати!</span></div>
+<hr class="form-sep"><div class="form-row"><span class="form-label">معاني أخرى</span><span class="form-ru" style="color:#c8d8e8">إِمْسَاك — удержание; مُمْسِك — держащий</span></div>
+<hr class="form-sep"><div class="prep-block"><div class="form-row" style="margin-bottom:.2rem"><span class="form-label">مع حروف</span></div>
+<div class="prep-item"><span class="prep-ar">أَمْسَكَ بِـ</span><span class="prep-ru">— схватил что-то</span></div>
+<div class="prep-item"><span class="prep-ar">أَمْسَكَ عَنِ الكَلَام</span><span class="prep-ru">— воздержался от речи</span></div>
+</div>' data-tab1='<div class="root-display"><span class="root-letters">م — س — ك</span><span class="root-trans">m·s·k</span></div>
+<hr class="root-sep">
+<div class="wazn-block"><div class="wazn-row"><span class="wazn-label">الوزن</span><span class="wazn-ar">أَفْعَلَ</span><span class="wazn-num">IV порода</span></div><div class="wazn-meaning">«Сделать держащим»</div></div>
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Держание, удержание, мускус.</b></span></div>
+<hr class="root-sep"><div class="family-block">
+<div class="family-item"><span class="fam-ar">أَمْسَكَ</span><span class="fam-ru">схватил</span></div>
+<div class="family-item"><span class="fam-ar">إِمْسَاكٌ</span><span class="fam-ru">удержание</span></div>
+<div class="family-item"><span class="fam-ar">مِسْكٌ</span><span class="fam-ru">мускус — «то что держит» аромат</span></div>
+</div>' data-tab2='<div class="image-block"><span class="image-icon">💪🐍</span><div class="image-title">Схватить змею голыми руками</div><div class="image-text">أَمْسِكَ الثُّعْبَان = <b>схватить змею</b>. Испытание веры: доверяешь ли ты Аллаху настолько чтобы схватить гигантскую змею?</div></div>'>فَأَمَرَهُ اللهُ أَنْ يُمْسِكَ الثُّعْبَانَ</span>
+ ، 
+<span class="w" data-word="فَعَادَ الثُّعْبَانُ الْكَبِيرُ عَصَا مَرَّةً أُخْرَى" data-kind="فعل" data-quick="и стала огромная змея снова посохом" data-tab0='<div class="form-row"><span class="form-label">ماضي</span><span class="form-ar">عَادَ</span><span class="form-ru">— вернулся, стал снова</span></div>
+<div class="form-row"><span class="form-label">مضارع</span><span class="form-ar">يَعُودُ</span><span class="form-ru">— возвращается</span></div>
+<div class="form-row"><span class="form-label">أمر</span><span class="form-ar">عُدْ</span><span class="form-ru">— вернись!</span></div>' data-tab1='<div class="root-display"><span class="root-letters">ع — و — د</span><span class="root-trans">ʿ·w·d</span></div>
+<hr class="root-sep">
+<div class="core-block"><span class="core-label">ядро корня</span><span class="core-text"><b>Возврат.</b></span></div>' data-tab2='<div class="image-block"><span class="image-icon">🪄✨</span><div class="image-title">Змея снова посох</div><div class="image-text">فَعَادَ الثُّعْبَان عَصَا = <b>змея снова стала посохом</b>. Круг замкнулся. Муса держит в руке тот же посох — но теперь знает: это знамение Аллаха.</div></div>'>فَعَادَ الثُّعْبَانُ الْكَبِيرُ عَصَا مَرَّةً أُخْرَى</span>
+ <span class="sb" onclick="toggleSent('s146_5')">📖</span>
+</p>
+<div class="sp" id="s146_5"><div class="sph">قَالَ مُوسَى مُجِيبًا لِرَبِّهِ مُطْمَئِنًّا فِي كَلَامِهِ : هِيَ عَصَايَ ، أَتَوَكَّأُ عَلَيْهَا وَأَسْقُطُ الْوَرَقَ عَلَى غَنَمِي ، وَلِيَ فِيهَا مَآرِبُ أُخْرَى ؛ فَأَمَرَهُ اللهُ أَنْ يُلْقِيَ هَذِهِ الْعَصَا فَإِذَا بِهَا تَتَحَوَّلُ إِلَى ثُعْبَانٍ كَبِيرٍ يَتَحَرَّكُ عَلَى الْأَرْضِ وَيَلْتَهِمُ كُلَّ شَيْءٍ ، فَخَافَ مُوسَى وَتَمَلَّكَهُ الْفَزَعُ ، فَأَمَرَهُ اللهُ أَنْ يُمْسِكَ الثُّعْبَانَ ، فَعَادَ الثُّعْبَانُ الْكَبِيرُ عَصَا مَرَّةً أُخْرَى</div><div class="spb">
+<div class="spr"><span class="spri">📝</span><span class="sprl">Дословно:</span><span class="sprt">Сказал Муса отвечая Господу своему спокойным в речи своей: это посох мой, опираюсь я на него и стряхиваю листья на овец моих, и для меня в нём нужды другие; и приказал ему Аллах бросить посох этот и вдруг он превращается в змею огромную движется по земле и пожирает всё, и испугался Муса и овладел им ужас, и приказал ему Аллах схватить змею, и стала змея огромная посохом снова.</span></div>
+<div class="spr"><span class="spri">🔤</span><span class="sprl">Прямой перевод:</span><span class="sprt">Муса спокойно ответил Господу: «Это мой посох — я опираюсь на него, стряхиваю им листья для овец, и есть другие нужды». Аллах приказал бросить посох — и вдруг он превратился в огромную ползущую змею, пожирающую всё. Муса ужаснулся. Тогда Аллах приказал схватить змею — и она снова стала посохом.</span></div>
+<div class="spr"><span class="spri">💬</span><span class="sprl">Литературный:</span><span class="sprt">Муса спокойно ответил: «Это мой посох — опираюсь, листья стряхиваю, и ещё кое-что». Аллах сказал: «Брось». Посох упал — и стал огромной змеёй. Муса отпрянул в ужасе. «Схвати». Муса схватил — и в руке снова посох.</span></div>
+<div class="spr"><span class="spri">🔬</span><span class="sprl">الإعراب:</span><span class="sprt" style="direction:rtl;font-family:'Scheherazade New',serif;font-size:1rem">قَالَ مُجِيبًا مُطْمَئِنًّا: حالان / هِيَ عَصَايَ: مبتدأ وخبر / أَتَوَكَّأُ وَأَسْقُطُ: فعلان / مَآرِبُ أُخْرَى: فاعل لِيَ / فَأَمَرَهُ: فعل / فَإِذَا بِهَا: فجائية / تَتَحَوَّلُ: خبر / تَمَلَّكَهُ الفَزَعُ: فعل وفاعل ومفعول / فَعَادَ الثُّعْبَانُ عَصَا: فعل واسم وخبر</span></div>
+<div class="spr"><span class="spri">💡</span><span class="sprl">Заметка:</span><span class="sprt" style="color:#9ab89a;font-style:italic">هِيَ عَصَايَ، أَتَوَكَّأُ عَلَيْهَا — ответ Мусы поэтически трогательный. Он описывает посох как верного спутника. А Аллах покажет ему его истинную силу.</span></div>
+</div></div>
+
+<div class="page-num" style="position:static;margin:2rem auto 0;width:2.2rem;height:2.2rem;background:var(--accent);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-family:'Amiri',serif">١٤٦</div>
+</div>
+
+</div>
+
+<!-- OVERLAY для bottom sheet -->
+<div id="bs-overlay" onclick="closeBs()"></div>
+
+<!-- МОБИЛЬНАЯ БЫСТРАЯ ПОЛОСКА (1й tap) -->
+<div id="mobile-quick">
+  <div class="mq-left">
+    <span class="mq-word" id="mq-word"></span>
+    <span class="mq-dash">—</span>
+    <span class="mq-trans" id="mq-trans"></span>
+  </div>
+  <button class="mq-btn" id="mq-btn" onclick="openBsFromQuick()">подробнее ↑</button>
+</div>
+
+<!-- BOTTOM SHEET (мобильный) -->
+<div id="bottom-sheet">
+  <div class="bs-handle" id="bs-handle"></div>
+  <div class="bs-header">
+    <span class="panel-word" id="bs-word"></span>
+    <span class="panel-kind" id="bs-kind"></span>
+    <button class="panel-close" onclick="closeBs()">✕</button>
+  </div>
+  <div class="bs-tabs" id="bs-tabs">
+    <button class="bs-tab active" onclick="switchBsTab(0)">📖 Формы</button>
+    <button class="bs-tab" onclick="switchBsTab(1)">🌱 Корень</button>
+    <button class="bs-tab" onclick="switchBsTab(2)">🧠 Образ</button>
+  </div>
+  <div class="bs-body" id="bs-body"></div>
+</div>
+
+<script>
+const isMobile = () => window.innerWidth <= 700;
+
+// ── состояние ──
+let activeWord = null;   // текущий выбранный span.w
+let panelOpen  = false;  // открыта ли панель/sheet
+let quickShown = false;  // показана ли быстрая полоска (мобильный)
+let currentTab = 0;
+
+const qt     = document.getElementById('quick-tip');
+const qtWord = document.getElementById('qt-word');
+const qtTrans= document.getElementById('qt-trans');
+
+// истинный мобильный — touchscreen, а не ширина экрана
+const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+// ── навешиваем события один раз (не клонируем!) ──
+document.querySelectorAll('.w').forEach(el => {
+
+  // hover — только мышь
+  el.addEventListener('mouseenter', function(e) {
+    if (IS_TOUCH) return;
+    qtWord.textContent  = this.dataset.word  || '';
+    qtTrans.textContent = this.dataset.quick || '';
+    qt.style.display = 'block';
+    posQt(e);
+  });
+  el.addEventListener('mousemove', function(e) {
+    if (!IS_TOUCH) posQt(e);
+  });
+  el.addEventListener('mouseleave', function() {
+    if (!IS_TOUCH) qt.style.display = 'none';
+  });
+
+  // tap/click
+  el.addEventListener('click', function(e) {
+    e.stopPropagation();
+
+    if (IS_TOUCH) {
+      // ── МОБИЛЬНЫЙ ──
+      if (panelOpen) {
+        // панель открыта — закрыть
+        closeBs();
+        return;
+      }
+
+      if (activeWord === this && quickShown) {
+        // 2й tap на то же слово → открыть bottom sheet
+        openBs(this);
+        return;
+      }
+
+      // 1й tap (или смена слова) → показать быструю полоску
+      if (activeWord) activeWord.classList.remove('active');
+      activeWord = this;
+      this.classList.add('active');
+      showMobileQuick(this);
+
+    } else {
+      // ── ДЕСКТОП ──
+      qt.style.display = 'none';
+      if (activeWord === this && panelOpen) { closePanel(); return; }
+      if (activeWord) activeWord.classList.remove('active');
+      activeWord = this;
+      this.classList.add('active');
+      openPanel(this);
+    }
+  });
+});
+
+function posQt(e) {
+  const tw = qt.offsetWidth || 200;
+  let x = e.clientX - tw / 2;
+  let y = e.clientY - 52;
+  if (x < 8) x = 8;
+  if (x + tw > window.innerWidth - 8) x = window.innerWidth - tw - 8;
+  if (y < 8) y = e.clientY + 20;
+  qt.style.left = x + 'px';
+  qt.style.top = y + 'px';
+}
+
+/* ── ДЕСКТОП: боковая панель ── */
+function openPanel(el) {
+  window._activeEl = el;
+  document.getElementById('panel-word').textContent = el.dataset.word || '';
+  document.getElementById('panel-kind').textContent = el.dataset.kind || '';
+  currentTab = 0;
+  renderTab('panel-body', el, 0);
+  updateTabBtns('tabs', 'tab', 0);
+  document.getElementById('side-panel').classList.add('open');
+  document.getElementById('main').classList.add('panel-open');
+  panelOpen = true;
+}
+
+function closePanel() {
+  document.getElementById('side-panel').classList.remove('open');
+  document.getElementById('main').classList.remove('panel-open');
+  panelOpen = false;
+  if (activeWord) { activeWord.classList.remove('active'); activeWord = null; }
+  window._activeEl = null;
+}
+
+function switchTab(idx) {
+  currentTab = idx;
+  renderTab('panel-body', window._activeEl, idx);
+  updateTabBtns('tabs', 'tab', idx);
+}
+
+/* ── МОБИЛЬНЫЙ: быстрый перевод (1й tap) ── */
+function showMobileQuick(el) {
+  window._activeEl = el;
+  document.getElementById('mq-word').textContent  = el.dataset.word  || '';
+  document.getElementById('mq-trans').textContent = el.dataset.quick || '';
+  document.getElementById('mobile-quick').classList.add('show');
+  quickShown = true;
+}
+
+function hideMobileQuick() {
+  document.getElementById('mobile-quick').classList.remove('show');
+  quickShown = false;
+}
+
+function openBsFromQuick() {
+  if (window._activeEl) openBs(window._activeEl);
+}
+
+/* ── МОБИЛЬНЫЙ: bottom sheet ── */
+function openBs(el) {
+  window._activeEl = el;
+  hideMobileQuick();
+  document.getElementById('bs-word').textContent = el.dataset.word || '';
+  document.getElementById('bs-kind').textContent = el.dataset.kind || '';
+  currentTab = 0;
+  renderTab('bs-body', el, 0);
+  updateTabBtns('bs-tabs', 'bs-tab', 0);
+  document.getElementById('bottom-sheet').classList.add('open');
+  document.getElementById('bs-overlay').classList.add('open');
+  panelOpen = true;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBs() {
+  document.getElementById('bottom-sheet').classList.remove('open');
+  document.getElementById('bs-overlay').classList.remove('open');
+  hideMobileQuick();
+  panelOpen  = false;
+  quickShown = false;
+  document.body.style.overflow = '';
+  if (activeWord) { activeWord.classList.remove('active'); activeWord = null; }
+  window._activeEl = null;
+}
+
+function switchBsTab(idx) {
+  currentTab = idx;
+  renderTab('bs-body', window._activeEl, idx);
+  updateTabBtns('bs-tabs', 'bs-tab', idx);
+}
+
+/* ── общие ── */
+function renderTab(bodyId, el, idx) {
+  if (!el) return;
+  const key = 'tab' + idx;
+  document.getElementById(bodyId).innerHTML =
+    el.dataset[key] || '<div style="color:#555;padding:1rem;direction:ltr;font-size:.8rem">нет данных</div>';
+}
+
+function updateTabBtns(containerId, btnClass, activeIdx) {
+  document.querySelectorAll('#' + containerId + ' .' + btnClass).forEach((btn, i) => {
+    btn.classList.toggle('active', i === activeIdx);
+  });
+}
+
+// свайп вниз — закрыть bottom sheet
+let bsTouchY = 0;
+document.getElementById('bs-handle').addEventListener('touchstart', e => {
+  bsTouchY = e.touches[0].clientY;
+});
+document.getElementById('bs-handle').addEventListener('touchmove', e => {
+  const dy = e.touches[0].clientY - bsTouchY;
+  if (dy > 60) closeBs();
+});
+
+// клик вне — закрыть
+document.addEventListener('click', function(e) {
+  if (!isMobile() && panelOpen &&
+      !document.getElementById('side-panel').contains(e.target)) {
+    closePanel();
+  }
+  // мобильный: клик вне слова и вне quick bar — скрыть quick bar
+  if (isMobile() && !panelOpen) {
+    const mq = document.getElementById('mobile-quick');
+    if (!e.target.closest('.w') && !e.target.closest('#mobile-quick')) {
+      hideMobileQuick();
+      if (activeWord) { activeWord.classList.remove('active'); activeWord = null; }
+    }
+  }
+});
+
+// ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { panelOpen && (isMobile() ? closeBs() : closePanel()); }
+});
+
+function toggleSent(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── харакаты ──
+const harakatRe = /[\u064B-\u065F\u0670]/g;
+let harakatOn = true;
+document.querySelectorAll('p.ar, .sph').forEach(el => { el.dataset.orig = el.innerHTML; });
+function toggleHarakat() {
+  harakatOn = !harakatOn;
+  document.querySelectorAll('p.ar, .sph').forEach(el => {
+    // меняем только текстовые узлы, не трогаем span.w
+    if (harakatOn) {
+      el.innerHTML = el.dataset.orig;
+    } else {
+      // убираем харакаты только из текстовых узлов
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(n => { n.textContent = n.textContent.replace(harakatRe, ''); });
+    }
+  });
+}
+</script>
+</body>
+</html>
